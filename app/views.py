@@ -7,4 +7,6 @@ from django.http import HttpResponse
 
 
 def main(request):
-        return HttpResponse(render_to_string('index.html'))
+	#context = {}
+
+	return render(request, "index.html")

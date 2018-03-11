@@ -54,7 +54,7 @@ ROOT_URLCONF = 'olimp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  #modify this line
+        'DIRS': ["templates"],  #modify this line
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
