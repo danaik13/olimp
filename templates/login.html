@@ -1,0 +1,13 @@
+{% load staticfiles %}
+{% block authorization %}
+
+<div class="authorization">
+	{% if error='' %}
+		<input type="text" class="login">
+		<input type="password" class="password">
+	{% else %}
+		<div class="button" type="submit">Выйти</div>
+	{% endif %}
+</div>
+
+{% endblock %}

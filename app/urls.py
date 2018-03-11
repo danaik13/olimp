@@ -6,8 +6,6 @@ from . import views
 
 
 urlpatterns = [
+   url(r'^admin', admin.site.urls),      # Админка
    url(r'^',      views.main), 
-
-
-   
 ]
