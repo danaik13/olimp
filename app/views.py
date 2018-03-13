@@ -4,7 +4,20 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-
+def createAcount(request):
+	if request.method == 'POST':
+		login     = request.POST['login']
+		password  = request.POST['password']
+		password2 = request.POST['password2']
+		name      = request.POST['name']
+		if password==password2:
+			db_create_account = User.objects.create(
+				login = login,
+				password = password,
+				name = name                
+		)
+     
+	return render(request, "createAcount.html")
 
 def main(request):
 	#context = {}
@@ -41,3 +54,12 @@ def login(request):
 		else:
 			error = u'Неверный логин / пароль'
 	return render(request,'login.html',{'error':error})
+
+
+"""
+if password == password2:
+
+return render(request, "login.html")
+else:
+return render(request, 'createAcount.html', {'error': 'Пароли не совпадают'})
+"""

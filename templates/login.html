@@ -1,10 +1,14 @@
 {% load staticfiles %}
-{% block authorization %}
+{% block login %}
 
 <div class="authorization">
-	{% if error='' %}
-		<input type="text" class="login">
-		<input type="password" class="password">
+	{% if error == '' %}
+		<input type="text" class="login"><br>
+		<input type="password" class="password"><br>
+		<div class="button" type="submit">Войти</div>
+		<p>{{error}}</p>
+
+		<a href="/createacount">регистрация</a>
 	{% else %}
 		<div class="button" type="submit">Выйти</div>
 	{% endif %}
