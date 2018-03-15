@@ -5,6 +5,7 @@ class User(models.Model):
 	login    = models.CharField(max_length=255, verbose_name='Логин')
 	password = models.CharField(max_length=255, verbose_name='Пароль')
 	name     = models.CharField(max_length=255, verbose_name='Имя')
+	
 	class Meta:
 	    verbose_name_plural = "Пользователь"
 	def __str__(self):              # __unicode__ on Python 2

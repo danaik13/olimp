@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.http import HttpResponse
-
+from .models import *
 # Create your views here.
+
+
 
 def createAcount(request):
 	if request.method == 'POST':
@@ -11,15 +13,16 @@ def createAcount(request):
 		password2 = request.POST['password2']
 		name      = request.POST['name']
 		if password==password2:
+			print("kek")
 			db_create_account = User.objects.create(
 				login = login,
 				password = password,
 				name = name                
-		)
+			)
      
 	return render(request, "createAcount.html")
 
-def main(request):
+def index(request):
 	#context = {}
 
 	return render(request, "index.html")

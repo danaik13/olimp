@@ -8,7 +8,7 @@ from . import views
 
 urlpatterns = [
    url(r'^admin', admin.site.urls), # Админка
-   url(r'^createacount', views.createAcount), # Регистрация
-
+   url(r'^createacount$', views.createAcount), # Регистрация
+	url(r'^index$', views.index), # Регистрация
    url(r'^', views.login), 
 ]
