@@ -1,6 +1,16 @@
-{% extends 'base.html' %}
-{% block login %}
-
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<script src="{% static 'js/script.js' %}"></script>
+	<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+<title>
+Олимп
+</title>
+</head>
+<body>
 <div class="authorization">
 
 	{% if error == '' %}
@@ -14,5 +24,5 @@
 		<div class="button" type="submit">Выйти</div>
 	{% endif %}
 </div>
-
-{% endblock %}
+</body>
+</html>
