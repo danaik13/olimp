@@ -1,4 +1,22 @@
+
 {% extends 'base.html' %}
 {% block index %}
-<p>Содержимое index.html</p>
+
+<div class="header">
+<p class="logo"><img src="images/logo.png"></p>
+<p class="iconki1"><a href="https://vk.com/sketnchbook_design_tgu" title="VK"><img src="{ % static 'images/vk.png' %}"></a></p>
+<p class="iconki2"><a href="https://www.instagram.com" title="Instagram"><img src="images/inst.png"></a></p>
+<p class="iconki1"><a href="https://ru-ru.facebook.com" title="Facebook"><img src="images/fac.png"></a></p>
+<p class="login"><a href="https://ru-ru.facebook.com"><img src="images/enter.png"></a></p>
+<div class="sidebar">
+<ul>
+<li><a href="">Главная</a>|</li>
+<li><a href="">Тесты</a>|</li>
+<li><a href="">Обучающимся</a>|</li>
+<li><a href="">Опросы</a>|</li>
+<li><a href="">Новости</a></li>
+</ul>
+</div>
+</div>
+
 {% endblock %}
