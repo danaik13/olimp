@@ -1,5 +1,5 @@
 body {
-	background: #282828;
+	background: #CFCFCF;
 	color: #000000;
    /* display:block;*/
     margin:0px;
@@ -91,7 +91,7 @@ li{
 .content {
 	margin-left:auto; 
     margin-right:auto;
-	margin-top:-35px;
+	margin-top:0px;
     width:1200px;
     height:750px;
     background: #FFFFFF;
@@ -113,3 +113,20 @@ li{
 	float:center;
 	margin-top:10px;
 }
+
+/*подвал*/
+.footer {
+    margin-left:auto;
+    margin-right:auto;
+	margin-top: 0px;
+    width:1200px;
+    height:50px;
+    background: #FFFFFF;
+	background: rgba(255, 255, 255, 0.3);
+	
+    }
+	.slk{
+	float:right;
+	margin-right:60px;
+	}
+	a{text-decoration: none;}

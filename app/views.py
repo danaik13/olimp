@@ -32,18 +32,12 @@ def content(request):
 	#context = {}
 
 	return render(request, "content.html")
-
-	
-def main(request):
-
-	#context = {}
-
-	return render(request, "index.html")
 	
 def test(request):
 	#context = {}
 
 	return render(request, "test.html")
+	
 
 def do_login(login, password):
 	try:
