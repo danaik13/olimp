@@ -10,3 +10,15 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
     list_display = ('id', 'key', 'user','expires')
+
+@admin.register(Categorie)
+class CategorieAdmin(admin.ModelAdmin):
+    list_display = ('id', 'сategorie')
+
+@admin.register(GropUser)
+class GropUserAdmin(admin.ModelAdmin):
+    list_display = ('id', 'gropUser')
+
+@admin.register(Test)
+class TestAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'сategorie', 'gropUser', 'dateStart', 'dateEnd')
