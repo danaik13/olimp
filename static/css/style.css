@@ -15,8 +15,9 @@ body {
 .header {
     margin-left:auto;
     margin-right:auto;
-    width:1200px;
-    height:255px;
+	margin-top: -40px;
+    width:auto;
+    height:100px;
     background: #FFFFFF;
 	background: rgba(255, 255, 255, 0.3);
 	color: #000000;
@@ -25,11 +26,57 @@ body {
 }
 /*логотип*/
 .logo{
-	margin-left:50px;
-    margin-right:auto;
-	margin-top:30px;
-	float:left;
-	width:20%;
+	margin-left:200px;
+	margin-bottom: -20px;
+	font-family: 'Comfortaa', cursive;
+	font-size: 300%;
+	font-weight: 600;
+}
+.login{
+	margin-left:-200px;
+}
+.password{
+	margin-top:-21px;
+	margin-right: 300px;
+	float:right;
+}
+.button{
+	width:50px;
+	height:25px;
+	border-radius: 4px;
+	font-size: 12px;
+	font-family: 'Exo 2', sans-serif;
+    background:#e6e9ee;
+	color:#20303d;
+	cursor:pointer;
+	float:right;
+	margin-right: 240px;
+	margin-top:-40px;
+}
+ form{
+	margin:165px auto;
+    width: 510px;	height: 500px; /* Размеры */
+    /*background: #;  Цвет фона */
+    /*outline: 2px solid #000;  Чёрная рамка */
+    border-radius: 10px; /* Радиус скругления */
+	 text-align:  center;
+	 font: normal 17px timse;
+	 color:white;
+	 background-color: #696969;
+   }
+  .regest input{
+	text-align: center;
+    width:198px;
+    height:27px;
+	background-color:#3b4148;
+    border:1px solid #dedede;
+    padding:0 16px;
+    margin:20px auto;
+    font-size:0.9em;
+    color:#FFFFFF;
+    -moz-border-radius:0px 3px 3px 0px;
+    -webkit-border-radius:0px 3px 3px 0px;
+    border-radius:5px;
 }
 img{
 	width:50%;
@@ -52,41 +99,14 @@ margin-left:-30px;
 .loginlo{
 	width:10%;
 	float:right;
-	margin-left:0px;
-	margin-right:0px;
+	margin-top:-25px;
+	margin-right:100px;
 }
-/*меню*/
-.sidebar {
-    width:1200px;
-    height:65px;
-	float:left;
-	text-align:center;
-} 
-ul{
 
-	margin:0;
-    list-style-type: none;
+.authorization{
+	float:right;
 }
-li{
-	display: inline; 
-	color:#B5B5B5;
-	font-size:20px;
-	position: relative; 
-    top: 0.3em;
-}
- li a{
-	text-decoration: none;
-	color:#000000;
-	font-size:20px;
-	padding: 0px 25px;        
-	display: inline-block;
-}
-	li a:hover {
-  background-color: #282828;
-  color:#FFFFFF;
-  width:auto;
-  height:25px;
-}
+
 /*контент*/
 .content {
 	margin-left:auto; 
@@ -111,7 +131,7 @@ li{
 .regest{
 	margin-left:500px;
 	float:center;
-	margin-top:10px;
+	margin-top:20px;
 }
 
 /*подвал*/
