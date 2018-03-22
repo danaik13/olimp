@@ -27,6 +27,21 @@ def index(request):
 #context = {}
 
 	return render(request, "index.html")
+
+def rezultat(request):
+#context = {}
+
+	return render(request, "rezultat.html")
+
+def fullInformation(request):
+#context = {}
+
+	return render(request, "fullInformation.html")
+
+def adminTest(request):
+#context = {}
+
+	return render(request, "adminTest.html")
 	
 def content(request):
 	#context = {}
