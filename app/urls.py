@@ -16,6 +16,6 @@ urlpatterns = [
 	url(r'^rezultat', views.rezultat), #контент
 	url(r'^fullInformation', views.fullInformation), #контент
 	url(r'^adminTest', views.adminTest), #контент
-
+	url(r'^lichCab', views.lichCab), #контент
 	url(r'^', views.login), 
 ]

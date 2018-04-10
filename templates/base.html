@@ -16,23 +16,30 @@
 </head>
 <body>
 
-<div class="header">
-	<p class="logo">ОЛИМП</p>
-	<p class="loginlo"><a href="">йцу<img src="https://www.classrr.com/storage/images/a6bcaa15ed5d47fbf1049238e54e6664.jpeg"></a></p>
-</div>
-
+<div class="container-fluid">
+	<div class="page-header">
+		<div class="row">
+			<div class="col-xs-6 col-md-4">
+				<h1>ОЛИМП</h1>
+			</div>
+			<div class="col-xs-2 col-md-3"></div>
+			<div class="col-xs-6 col-md-4">
+				
+			</div>
+		</div>
+	</div>
+	{% block rezultat %}{% endblock %}
+	
+	{% block fullInformation %}{% endblock %}
+	
 	{% block index %}{% endblock %}
 
 	{% block content %}{% endblock %}
 
 	{% block test %}{% endblock %}
 
-
-
-
-<div class="footer">
-	<p class="slk" >@2018<a href="" ip="fg"> ДНО</a></p>
-</div>	
+	{% block lichCab %}{% endblock %} 
+</div>
 
 </body>
 </html>

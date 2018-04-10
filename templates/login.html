@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
 	<script src="{% static 'js/script.js' %}"></script>
 	<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
@@ -18,37 +19,78 @@
 </head>
 <body>
 
-<div class="header">
-	<p class="logo">ОЛИМП</p>
+<div class="container-fluid">
+	
+	<div class="page-header">
+		<div class="row">
+			<div class="col-xs-6 col-md-4">
+				<h1>ОЛИМП</h1>
+			</div>
+			<div class="col-xs-2 col-md-3"></div>
+			<div class="col-xs-6 col-md-4">
+				<form action="" method="POST">
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-xs-4">
+ 							<div class="form-group">
+					            <input type="text" class="form-control" id="inputLogin" placeholder="Логин">
+			        		</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="form-group">
+					            <input type="password" class="form-control" id="inputPassword" placeholder="Пароль">
+			        		</div>
+						</div>
+						<div class="col-xs-4">
+							<button type="submit" class="btn btn-primary" id="autoriz">Вход</button>
+						</div>
+					</div> 
+		    	</form>
+			</div>
+		</div>
+	</div>
 
-<div class="authorization">
+	<div class="row">
+		<div class="col-xs-6"></div>
+		<div class="col-xs-5">
+			<div class="h1">Регистрация</div>
+		    <form  class="form" action="/createAcount" method="POST">
+		    	{% csrf_token %}
+		        <div class="form-group">
+		        	<div class="row">
+						<div class="col-xs-6">
+					        <label  for="nameField">Имя</label>
+		           	 		<input  type="text" class="form-control" id="nameField" placeholder="Твое Имя"  />
+						</div>
+						<div class="col-xs-6">
+				            <label  for="lastnameField">Фамилия</label>
+		            		<input  type="text" class="form-control" id="lastField" placeholder="Твоя Фамилия"  />
+						</div>
+					</div>
+		        </div>
+		        <div class="form-group">
+		            <label  for="loginField">Логин</label>
+		            <input  type="text" class="form-control" id="loginField" placeholder="Твой Логин"  />
+		        </div>
+		        <div class="form-group">
+		            <label  for="emailField">Email</label>
+		            <input  type="email" class="form-control" id="emailField" placeholder="Твой Email"  />
+		        </div>
+		        <div class="form-group">
+		            <label  for="passwordField">Пароль</label>
+		            <input  type="password" class="form-control" id="passwordField" placeholder="Пароль" />
+		        </div>
+		        <div class="form-group">
+		            <label  for="passwordTwoField">Повторите Пароль</label>
+		            <input  type="password" class="form-control" id="passwordTwoField" placeholder="Повторите Пароль" />
+		        </div>
+		        <button type="submit" class="btn btn-primary">Создать аккаунт</button>
+		    </form>
+		</div>
+		<div class="col-xs-1"></div>	
+	</div>
 
-	{% if error == '' %}
-		<input type="text" class="login"><br>
-		<input type="password" class="password"><br>
-		<div class="button" type="submit">Войти</div>
-		<p>{{error}}</p>
-
-		<a href="/createacount">регистрация</a>
-	{% else %}
-		<div class="button" type="submit">Выйти</div>
-	{% endif %}
 </div>
-</div>
 
-
-<div class="polregestr">
-
-<form action="" method="POST" class="regest">
-    {% csrf_token %}
-    <input type="text"     name="login"     maxlength="30" placeholder="Введите логин"    required/><br>
-    <input type="password" name="password"  maxlength="30" placeholder="Введите пароль"   required/><br>
-    <input type="password" name="password2" maxlength="30" placeholder="Повторите пароль" required/><br>
-    <input type="text"     name="name"      maxlength="30" placeholder="Введите имя"      required/><br>
-    <input class="button1" type="submit" value="Зарегистрироваться">
-    <p>{{error}}</p>
-</form>
-
-</div>
 </body>
 </html>

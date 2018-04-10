@@ -5,7 +5,7 @@ from .models import *
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'login','password','name')
+    list_display = ('id', 'login', 'password', 'email', 'gropUser','surname','name','middlename')
 
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
@@ -19,6 +19,3 @@ class CategorieAdmin(admin.ModelAdmin):
 class GropUserAdmin(admin.ModelAdmin):
     list_display = ('id', 'gropUser')
 
-@admin.register(Test)
-class TestAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'сategorie', 'gropUser', 'dateStart', 'dateEnd')

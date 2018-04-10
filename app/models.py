@@ -1,11 +1,21 @@
 from django.db import models
 
+class GropUser(models.Model):
+	gropUser = models.CharField(max_length=255, verbose_name='Группа пользователей')
+	class Meta:
+	        verbose_name_plural = "Группа пользователей"
+	def __str__(self):              # __unicode__ on Python 2
+		return self.gropUser
+
 # Create your models here.
 class User(models.Model):
 	login    = models.CharField(max_length=255, verbose_name='Логин')
 	password = models.CharField(max_length=255, verbose_name='Пароль')
+	gropUser= models.ForeignKey(GropUser,  on_delete=models.CASCADE, verbose_name='Группа пользователей', default=1)
+	surname  = models.CharField(max_length=255, verbose_name='Фамилия')
+	email    = models.EmailField(max_length=255, verbose_name='email', default='qwerty@qwe.com')
 	name     = models.CharField(max_length=255, verbose_name='Имя')
-	
+	middlename = models.CharField(max_length=255, verbose_name='Отчество', default='')
 	class Meta:
 	    verbose_name_plural = "Пользователь"
 	def __str__(self):              # __unicode__ on Python 2
@@ -27,21 +37,4 @@ class Categorie(models.Model):
 	def __str__(self):              # __unicode__ on Python 2
 		return self.сategorie
 
-class GropUser(models.Model):
-	gropUser = models.CharField(max_length=255, verbose_name='Группа пользователей')
-	class Meta:
-	        verbose_name_plural = "Группа пользователей"
-	def __str__(self):              # __unicode__ on Python 2
-		return self.gropUser
 
-class Test(models.Model):
-	name = models.CharField(max_length=255, verbose_name='Название теста') 
-	сategorie = models.ForeignKey(Categorie,  on_delete=models.CASCADE, verbose_name='Категория')
-	gropUser = models.ForeignKey(GropUser,  on_delete=models.CASCADE, verbose_name='Группа пользователей')
-	dateStart = models.DateTimeField(verbose_name='Начало теста')
-	dateEnd = models.DateTimeField(verbose_name='Окончание теста')
-
-	class Meta:
-	        verbose_name_plural = "Тест"
-	def __str__(self):              # __unicode__ on Python 2
-		return self.name

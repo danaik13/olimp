@@ -1,8 +1,107 @@
 {% extends 'base.html' %}
 {% block index %}
 
-<div class="content">
-Категории
+ {% for tests in test %}
+<div class="row">
+	<div class="col-xs-3 col-md-3"></div>
+	<div class="col-xs-8 col-md-8"> 
+		<div class="panel panel-default">
+			<div class="panel-body"> 
+			 	<h3><a href="">{{test.name}} </a></h1>
+			 	<p>{{test.shortData}}</p>
+			 	<div class="row">
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-check" aria-hidden="true">{{test.birth}}</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"> {{test.сategorie}}</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-signal" aria-hidden="true"> Пройдено {{test.quantity}}</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3"></div>
+			 	</div>
+        	</div>
+ 		</div>
+	</div>
 </div>
+{% endfor %}
+
+
+
+
+<div class="row">
+	<div class="col-xs-3 col-md-3"></div>
+	<div class="col-xs-8 col-md-8"> 
+		<div class="panel panel-default">
+			<div class="panel-body"> 
+			 	<h3><a href="">Название теста</a></h1>
+			 	<p>Тут типо небольшое описание того, для чего и почему сделан этот тест. Что ждет проходящего,смысл жизни, ну и вообще звони на телефон 9876546851, а то скучно. жду</p>
+			 	<div class="row">
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-check" aria-hidden="true"> Создано 7.04.2018</span>
+			 			
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"> Информатика</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-signal" aria-hidden="true"> Пройдено 500</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3"></div>
+			 	</div>
+        	</div>
+ 		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-3 col-md-3"></div>
+	<div class="col-xs-8 col-md-8"> 
+		<div class="panel panel-default">
+			<div class="panel-body"> 
+			 	<h3><a href="">Название теста</a></h1>
+			 	<p>Тут типо небольшое описание того, для чего и почему сделан этот тест. Что ждет проходящего,смысл жизни, ну и вообще звони на телефон 9876546851, а то скучно. жду</p>
+			 	<div class="row">
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-check" aria-hidden="true"> Создано 7.04.2018</span>
+			 			
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"> Информатика</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-signal" aria-hidden="true"> Пройдено 500</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3"></div>
+			 	</div>
+        	</div>
+ 		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-3 col-md-3"></div>
+	<div class="col-xs-8 col-md-8"> 
+		<div class="panel panel-default">
+			<div class="panel-body"> 
+			 	<h3><a href="">Название теста</a></h1>
+			 	<p>Тут типо небольшое описание того, для чего и почему сделан этот тест. Что ждет проходящего,смысл жизни, ну и вообще звони на телефон 9876546851, а то скучно. жду</p>
+			 	<div class="row">
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-check" aria-hidden="true"> Создано 7.04.2018</span>
+			 			
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"> Информатика</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-signal" aria-hidden="true"> Пройдено 500</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3"></div>
+			 	</div>
+        	</div>
+ 		</div>
+	</div>
+</div>
+
 
 {% endblock %}
