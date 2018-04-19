@@ -8,38 +8,25 @@ from .models import *
 
 def createAcount(request):
 	if request.method == 'POST':
-		login     = "dsd"#request.POST['loginField']
-		password  = "a" #request.POST['passwordField']
-		password2 = "a" #request.POST['passwordTwoField']
-		email     = "a@wsa.ew" #request.POST['emailField']
-		name     = "a" #request.POST['nameField']
-		lastname  = "d" #request.POST['lastField']
-		
+		login     = request.POST['login']
+		password  = request.POST['password']
+		password2 = request.POST['password2']
+		name      = request.POST['name']
 		if password==password2:
-			print("WOW! New User :3")
-			"""db_create_account = User.objects.create(
-				login    = login,
+			print("kek")
+			db_create_account = User.objects.create(
+				login = login,
 				password = password,
-				gropUser = GropUser.object.get(id=1),
-				surname  = lastname,
-				email    = email,
-				name     = name,         
+				name = name                
 			)
-     """
-	return render(request, "index.html")
+     
+	return render(request, "createAcount.html")
 
 
 def index(request):
 #context = {}
 
 	return render(request, "index.html")
-
-def lichCab(request):
-#context = {}
-
-	return render(request, "lichCab.html")
-
-
 
 def rezultat(request):
 #context = {}
@@ -80,7 +67,8 @@ def do_login(login, password):
 	return session.key
 
 def login(request):
-	"""
+	Session.objects.all().delete()
+
 	error=''
 	if request.method == 'POST':
 		login = request.POST.get('login')
@@ -96,8 +84,7 @@ def login(request):
 			return response
 		else:
 			error = u'Неверный логин / пароль'
-			"""
-	return render(request,'login.html')
+	return render(request,'login.html',{'error':error})
 
 
 """
