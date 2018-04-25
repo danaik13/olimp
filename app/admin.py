@@ -5,7 +5,7 @@ from .models import *
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'login','password','name')
+    list_display = ('id', 'login','password','name', 'lastname','email')
 
 @admin.register(Session)
 class SessionAdmin(admin.ModelAdmin):
