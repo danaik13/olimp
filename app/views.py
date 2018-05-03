@@ -16,12 +16,10 @@ def connect(request):
 		print("connect False")
 		return False
 
-
 def main(request):
 	if connect(request):
 		return redirect("/index")
 	return render(request, "login.html")
-
 
 def createAcount(request):
 	if request.method == 'GET':
@@ -76,6 +74,18 @@ def rezultat(request):
 		return render(request, "rezultat.html")
 	return redirect("/")
 
+def saveTest(request):
+	if request.method == 'GET':
+		nameField = request.GET['nameField']
+		timeField = request.GET['timeField']
+		categoryField = request.GET['categoryField']
+		shortInfoField = request.GET['shortInfoField']
+		fullInfoField = request.GET['fullInfoField']
+		
+		print(nameField)
+	return redirect("/")
+
+
 def fullInformation(request):
 	if connect(request):
 		return render(request, "fullInformation.html")
@@ -83,7 +93,9 @@ def fullInformation(request):
 
 def adminTest(request):
 	if connect(request):
+
 		return render(request, "adminTest.html")
+
 	return redirect("/")
 	
 def content(request):
@@ -96,7 +108,6 @@ def test(request):
 		return render(request, "test.html")
 	return redirect("/")
 	
-
 def do_login(login, password):
 	try:
 		user = User.objects.get(login=login)

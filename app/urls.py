@@ -17,6 +17,7 @@ urlpatterns = [
 	url(r'^rezultat', views.rezultat), #контент
 	url(r'^fullInformation', views.fullInformation), #контент
 	url(r'^adminTest', views.adminTest), #контент
+	url(r'^saveTest/$', views.saveTest), #контент
 
 	url(r'^', views.main), 
 ]
