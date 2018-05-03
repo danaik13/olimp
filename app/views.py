@@ -36,7 +36,7 @@ def createAcount(request):
 				lastname = lastField,
 				login = loginField,
 				email = emailField,
-				password = passwordField,
+				password = hashlib.md5(passwordField.encode('utf-8')).hexdigest(),
 			)
 		else:
 			error = ' Пароли не совподают'
@@ -49,7 +49,6 @@ def login(request):
 		inputPassword = request.GET['inputPassword']
 		try:
 			user = User.objects.get(login=inputLogin)
-
 			if hashlib.md5(inputPassword.encode('utf-8')).hexdigest() == user.password:
 				request.session['login'] = inputLogin
 			else:
@@ -81,7 +80,7 @@ def saveTest(request):
 		categoryField = request.GET['categoryField']
 		shortInfoField = request.GET['shortInfoField']
 		fullInfoField = request.GET['fullInfoField']
-		
+
 		print(nameField)
 	return redirect("/")
 
