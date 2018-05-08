@@ -22,3 +22,7 @@ class GropUserAdmin(admin.ModelAdmin):
 @admin.register(Test)
 class TestAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'сategorie', 'gropUser', 'dateStart', 'dateEnd')
+
+@admin.register(Qwestion)
+class TestAdmin(admin.ModelAdmin):
+    list_display = ('id','answer',	'qwestion1',	'qwestion2',	'qwestion3',	'qwestion4')

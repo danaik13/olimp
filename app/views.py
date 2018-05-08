@@ -3,6 +3,10 @@ from django.shortcuts import render_to_response, redirect, render
 from django.http import HttpResponse
 from datetime import datetime, timedelta
 from .models import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template.loader import get_template
+
+
 
 import hashlib
 # Create your views here.
@@ -55,7 +59,7 @@ def login(request):
 				error = ' Логин или пароль не совподает'
 				return render(request,'login.html', {'errorLogin':error})
 		except:  
-			error = ' Логин или пародб не совподает'
+			error = ' Логин или пароль не совподает'
 			return render(request,'login.html', {'errorLogin':error})
 		return redirect("/index")
 
@@ -101,12 +105,13 @@ def content(request):
 	if connect(request):
 		return render(request, "content.html")
 	return redirect("/")
-	
+
+'''	
 def test(request):
 	if connect(request):
 		return render(request, "test.html")
 	return redirect("/")
-	
+'''
 def do_login(login, password):
 	try:
 		user = User.objects.get(login=login)
@@ -118,3 +123,12 @@ def do_login(login, password):
 	session.expires = datetime.now() + timedelta(days=5)
 	session.save()
 	return session.key
+
+def test(request, page_number=1):
+    if connect(request):      
+        all_qwestion = Qwestion.objects.all()
+        columl_qwestion = 1
+        current_page = Paginator(all_qwestion, columl_qwestion)
+        return render_to_response('test.html',{'qwestions':current_page.page(page_number)})
+    return redirect("/")
+

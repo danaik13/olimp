@@ -46,3 +46,34 @@ class Test(models.Model):
 	        verbose_name_plural = "Тест"
 	def __str__(self):              # __unicode__ on Python 2
 		return self.name
+
+class Qwestion(models.Model):
+	answer=models.CharField(max_length=255, verbose_name='Вопрос', default=None) 
+	qwestion1=models.CharField(max_length=255, verbose_name='Ответ1', default=None)
+	qwestion2=models.CharField(max_length=255, verbose_name='Ответ2', default=None)
+	qwestion3=models.CharField(max_length=255, verbose_name='Ответ3', default=None)
+	qwestion4=models.CharField(max_length=255, verbose_name='Ответ4', default=None)
+	class Meta:
+	        verbose_name_plural = "Вопрос"
+	def __str__(self):              # __unicode__ on Python 2
+		return self.answer
+'''
+class NEW_Qwestion(models.Model):
+	qwestion=models.CharField(max_length=255, verbose_name='Вопрос', default=None) 
+	Right_answer=models.CharField(max_length=255, verbose_name='Ответ1', default=None)
+	Wrong_answer=models.CharField(max_length=255, verbose_name='Ответ2', default=None)
+	class Meta:
+	        verbose_name_plural = "Вопрос"
+	def __str__(self):              # __unicode__ on Python 2
+		return self.qwestion
+
+class Answer(model.Model):
+	"""docstring for Answer"""
+	right_answer=models.CharField(max_length=255, verbose_name='Вопрос', default=None)
+	flagRightOrWrong= models. 
+	class Meta:
+	        verbose_name_plural = "Правильный_Ответ"
+	def __str__(self):              # __unicode__ on Python 2
+		return self.right_answer
+'''
+		
