@@ -124,11 +124,25 @@ def do_login(login, password):
 	session.save()
 	return session.key
 
-def test(request, page_number=1):
-    if connect(request):      
-        all_qwestion = Qwestion.objects.all()
+
+
+def test(request, page_number=1,id_test=2):
+    if connect(request):
+        testQwestion=TestQwestion.objects.filter(test=id_test)
         columl_qwestion = 1
-        current_page = Paginator(all_qwestion, columl_qwestion)
-        return render_to_response('test.html',{'qwestions':current_page.page(page_number)})
+        qwestions_page = Paginator(testQwestion, columl_qwestion)
+        temp=[]
+        for tq in testQwestion:
+            temp.append(Answer.objects.filter(qwestion=tq))
+        answer_page = Paginator(temp, columl_qwestion)
+
+        context={
+                 'qwestions':qwestions_page.page(page_number),
+                 'answers':answer_page.page(page_number),
+        }
+        return render_to_response('test.html',context)
     return redirect("/")
+
+
+
 

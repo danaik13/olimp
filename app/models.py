@@ -57,23 +57,21 @@ class Qwestion(models.Model):
 	        verbose_name_plural = "Вопрос"
 	def __str__(self):              # __unicode__ on Python 2
 		return self.answer
-'''
-class NEW_Qwestion(models.Model):
+
+class TestQwestion(models.Model):
 	qwestion=models.CharField(max_length=255, verbose_name='Вопрос', default=None) 
-	Right_answer=models.CharField(max_length=255, verbose_name='Ответ1', default=None)
-	Wrong_answer=models.CharField(max_length=255, verbose_name='Ответ2', default=None)
+	test=models.ForeignKey(Test,  on_delete=models.CASCADE,verbose_name='Тест', default=None)
 	class Meta:
-	        verbose_name_plural = "Вопрос"
+			verbose_name_plural = "Вопрос"
 	def __str__(self):              # __unicode__ on Python 2
 		return self.qwestion
 
-class Answer(model.Model):
+class Answer(models.Model):
 	"""docstring for Answer"""
-	right_answer=models.CharField(max_length=255, verbose_name='Вопрос', default=None)
-	flagRightOrWrong= models. 
+	answer=models.CharField(max_length=225, verbose_name='Ответ', default=None)
+	flagRightOrWrongAnswer= models.BooleanField(verbose_name='Корректность_ответа',default=None)
+	qwestion=models.ForeignKey(TestQwestion,  on_delete=models.CASCADE, verbose_name='Вопрос', default=None)	
 	class Meta:
-	        verbose_name_plural = "Правильный_Ответ"
+			verbose_name_plural = "Ответ"
 	def __str__(self):              # __unicode__ on Python 2
-		return self.right_answer
-'''
-		
+		return self.answer		

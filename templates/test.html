@@ -8,55 +8,6 @@
 <div class="row">
 	<div class="col-xs-1 col-md-1"></div>
 	<div class="col-xs-10 col-md-10">
-	    <div>
-	        <ul class="pagination pagination-sm">
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-	        </ul>
-	    </div>
 
 <!--нумерация страниц -->
             <ul class="pagination pagination-sm">
@@ -69,41 +20,25 @@
                 {% endfor %}
             </ul>
 
-	<div class="panel panel-primary">
+<div class="panel panel-primary">
 		{% for qwestion in qwestions %}   
         <div class="panel-heading">
-        	<h4>{{ qwestion.answer }}</a></h4>
+        	<h4>{{qwestion.qwestion}}</a></h4>
         </div>
         <!---checkbox-->
         <div>
-			<div class="checkbox">
-				<label>
+        	{% for answer in answers %}
+	        	{% for ans in answer %}
+				<div class="checkbox">
+					<label>
 					<input type="checkbox" value="" >
-					<!--<i class="fa fa-2x icon-checkbox"></i>-->
-				<p>{{ qwestion.qwestion1 }}</p>
-				</label>
-			</div>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" value="" >
-					<!--<i class="fa fa-2x icon-checkbox"></i>-->
-				<p>{{ qwestion.qwestion2 }}</p>
-				</label>
-			</div>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" value="" >
-					<!--<i class="fa fa-2x icon-checkbox"></i>-->
-				<p>{{ qwestion.qwestion3 }}</p>
-				</label>
-			</div>
-			<div class="radio">
-				 <label>
-					<input type="radio" name="optionsRadios" >
-					<!--<i class="fa fa-2x icon-checkbox"></i>-->
-				 	<p>{{ qwestion.qwestion4 }}</p>
- 				</label>
- 			</div>
+						<!--<i class="fa fa-2x icon-checkbox"></i>-->				
+						<p>{{ans}}</p>
+					</label>
+				</div>
+				{% endfor %}
+			{% endfor %}
+
 		</div>
 	</div>
 {% endfor %}

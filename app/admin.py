@@ -26,3 +26,11 @@ class TestAdmin(admin.ModelAdmin):
 @admin.register(Qwestion)
 class TestAdmin(admin.ModelAdmin):
     list_display = ('id','answer',	'qwestion1',	'qwestion2',	'qwestion3',	'qwestion4')
+
+@admin.register(TestQwestion)
+class TestAdmin(admin.ModelAdmin):
+    list_display = ('id','qwestion', 'test')
+
+@admin.register(Answer)
+class TestAdmin(admin.ModelAdmin):
+    list_display = ('id','answer','flagRightOrWrongAnswer','qwestion')
