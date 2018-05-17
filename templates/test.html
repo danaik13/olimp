@@ -2,67 +2,64 @@
 
 {%load staticfiles%}
 {% block test %}
-
-
-
 <div class="row">
+    <!-- Отступ слево -->
 	<div class="col-xs-1 col-md-1"></div>
+    <!-- Центр контента -->
 	<div class="col-xs-10 col-md-10">
+        <!--нумерация страниц -->
+        <ul class="pagination pagination-sm">
+            {% for page in qwestions.paginator.page_range %}
+                {% if page == qwestions.number %}
+                    <li class="current"><a href="/page/{{ page }}/">{{ page }}</a></li>
+                {% else %}
+                    <li><a href="/page/{{ page }}/">{{ page }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <!-- блок вопроса -->
+        <div class="panel panel-primary">
+        	{% for qwestion in qwestions %}   
+                <div class="panel-heading">
+                    <h4>{{qwestion.textQuestion}}</a></h4>
+                </div>
 
-<!--нумерация страниц -->
-            <ul class="pagination pagination-sm">
-                {% for page in qwestions.paginator.page_range %}
-                    {% if page == qwestions.number %}
-                        <li class="current"><a href="/page/{{ page }}/">{{ page }}</a></li>
+                <div>
+                    {% for answer in answers %}
+            	        	{% for ans in answer %}
+                                <p>   
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="radio" name="check">
+                                        </span>
+                                        <input type="text" class="form-control" value="{{ans}}">
+                                    </div>
+                                </p>
+            				{% endfor %}
+            		{% endfor %}
+            	</div>
+            {% endfor %}
+        </div>
+
+        <!--кнопки следующий/ответить/далее -->
+        <div class="row">
+            <div class="large-3 large-offset-5 columns">
+                <ul class="pager">
+                    {% if qwestions.has_previous %}
+                        <li><a href="/page/{{ qwestions.previous_page_number }}/">Предыдущий</a></li>
                     {% else %}
-                        <li><a href="/page/{{ page }}/">{{ page }}</a></li>
+                        <li><a href="">Начало</a></li>
                     {% endif %}
-                {% endfor %}
-            </ul>
+                    <li><a href="#" id="answer">Ответить</a></li>
+                    {% if qwestions.has_next %}
+                        <li><a href="/page/{{ qwestions.next_page_number }}/">Следующий</a></li>
+                    {% else %}
+                        <li><a href="">Конец</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
 
-<div class="panel panel-primary">
-		{% for qwestion in qwestions %}   
-        <div class="panel-heading">
-        	<h4>{{qwestion.qwestion}}</a></h4>
-        </div>
-        <!---checkbox-->
-        <div>
-        	{% for answer in answers %}
-	        	{% for ans in answer %}
-				<div class="checkbox">
-					<label>
-					<input type="checkbox" value="" >
-						<!--<i class="fa fa-2x icon-checkbox"></i>-->				
-						<p>{{ans}}</p>
-					</label>
-				</div>
-				{% endfor %}
-			{% endfor %}
-		</div>
-	</div>
-{% endfor %}
-<!--кнопки пагинации -->
-<div class="row">
-        <div class="large-3 large-offset-5 columns">
-            <ul class="pager">
-                {% if qwestions.has_previous %}
-                    <li><a href="/page/{{ qwestions.previous_page_number }}/">Предыдущий</a></li>
-                {% else %}
-                    <li><a href="">Начало</a></li>
-                {% endif %}
-                <li><a href="#" id="answer">Ответить</a></li>
-                {% if qwestions.has_next %}
-                    <li><a href="/page/{{ qwestions.next_page_number }}/">Следующий</a></li>
-                {% else %}
-                    <li><a href="">Конец</a></li>
-                {% endif %}
-            </ul>
-        </div>
     </div>
 </div>
-
-
-</div>
-</div>
-
 {% endblock %}

@@ -2,20 +2,26 @@
 
 body{
 	min-width: 722px;
+	background-image:'{% static "fon.jpg" %}'; 
+	background-repeat:no-repeat;
+    /*background-attachment:fixed; */
+    /*background-position:right 400px top;*/
+	background-size: 100%; 
+	font-family: 'Open Sans', sans-serif;
+
+
 }
 
-@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-.input-group-addon.beautiful input[type="checkbox"],
-.input-group-addon.beautiful input[type="radio"] {
-    display: none;
+#fon{
+	background-repeat:no-repeat;
+	width: 100%;
+	height: 100%;
+	background-attachment:;
+	position:fixed;
 }
-
-   textarea {
-    width: 100%; /* Ширина поля в процентах */
-    height: 100%; /* Высота поля в пикселах */
-    resize: none; /* Запрещаем изменять размер */
-   } 
-
-.navbar.navbar-default{
-background: #5bc0de;
+#darkening{
+	background: rgba(0,0,0, 0.6);
+	width: 100%;
+	height: 100%;
+	position:fixed;
 }

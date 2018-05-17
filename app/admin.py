@@ -21,8 +21,19 @@ class GropUserAdmin(admin.ModelAdmin):
 
 @admin.register(Test)
 class TestAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'сategorie', 'gropUser', 'dateStart', 'dateEnd')
+    list_display = ('id', 'name', 'сategorie', 'gropUser', 'dateStart', 'fullInfo', 'shortInfo', 'colQuition', 'timeTest', 'author')
 
+@admin.register(TextQuestion)
+class TestAdmin(admin.ModelAdmin):
+    list_display = ('id','textQuestion','test','typeQuestion')
+
+
+@admin.register(Question)
+class TestAdmin(admin.ModelAdmin):
+    list_display = ('id','question','answer','boolean', 'test')
+
+
+"""
 @admin.register(Qwestion)
 class TestAdmin(admin.ModelAdmin):
     list_display = ('id','answer',	'qwestion1',	'qwestion2',	'qwestion3',	'qwestion4')
@@ -34,3 +45,4 @@ class TestAdmin(admin.ModelAdmin):
 @admin.register(Answer)
 class TestAdmin(admin.ModelAdmin):
     list_display = ('id','answer','flagRightOrWrongAnswer','qwestion')
+"""

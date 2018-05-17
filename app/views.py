@@ -6,8 +6,6 @@ from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import get_template
 
-
-
 import hashlib
 # Create your views here.
 
@@ -23,6 +21,7 @@ def connect(request):
 def main(request):
 	if connect(request):
 		return redirect("/index")
+
 	return render(request, "login.html")
 
 def createAcount(request):
@@ -69,8 +68,19 @@ def logout(request):
 
 def index(request):
 	if connect(request):
-		return render(request, "index.html")
+		context = {
+			'login' : User.objects.get(login=request.session['login']),
+			'tests' : Test.objects.all(),
+		}
+		return render(request, "index.html", context)
+
 	return redirect("/")
+
+def lichcab(request):
+	if connect(request):
+		return render(request, "lichCab.html")
+	return redirect("/")
+
 
 def rezultat(request):
 	if connect(request):
@@ -89,9 +99,10 @@ def saveTest(request):
 	return redirect("/")
 
 
-def fullInformation(request):
+def fullInformation(request,test_id):
 	if connect(request):
-		return render(request, "fullInformation.html")
+		test = Test.objects.get(id=test_id)
+		return render(request, "fullInformation.html", {'test':test})
 	return redirect("/")
 
 def adminTest(request):
@@ -126,14 +137,16 @@ def do_login(login, password):
 
 
 
-def test(request, page_number=1,id_test=2):
+
+def test(request, page_number=1,test_id=2):
     if connect(request):
-        testQwestion=TestQwestion.objects.filter(test=id_test)
+        textQuestion=TextQuestion.objects.filter(test=test_id)
+        
         columl_qwestion = 1
-        qwestions_page = Paginator(testQwestion, columl_qwestion)
+        qwestions_page = Paginator(textQuestion, columl_qwestion)
         temp=[]
-        for tq in testQwestion:
-            temp.append(Answer.objects.filter(qwestion=tq))
+        for tq in textQuestion:
+            temp.append(Question.objects.filter(question=tq))
         answer_page = Paginator(temp, columl_qwestion)
 
         context={
@@ -142,7 +155,5 @@ def test(request, page_number=1,id_test=2):
         }
         return render_to_response('test.html',context)
     return redirect("/")
-
-
 
 

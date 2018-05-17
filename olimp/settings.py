@@ -128,4 +128,4 @@ LOGIN_REDIRECT_URL = '/'
 USE_TZ = True
 TIME_ZONE = 'Europe/Samara'
 
-DATE_INPUT_FORMATS = ('%d-%m-%Y')
+DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')

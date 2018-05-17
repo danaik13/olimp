@@ -1,125 +1,130 @@
 {% extends 'base.html' %}
 {% block admintest %}
-<div class="content">
 
-<div class="row" id="quetion-1">
-	<div class="col-xs-3 col-md-3"></div>
-	<div class="col-xs-6 col-md-6">
-		<div class="panel panel-primary">
-	        <div class="panel-body">
-				<dib class="row">
-					<div class="col-xs-11 col-md-11">
-						<div class="btn-group" data-toggle="buttons">
-							<label  class="btn btn-info active">
-						    	<input  type="radio" class="vied-1" name="options1"> Один
-							</label>
-							<label  class="btn btn-info">
-						    	<input  type="radio" class="vied-1" name="options2"> Несколько
-							</label>
-							<label  class="btn btn-info">
-						    	<input  type="radio" class="vied-1" name="options3"> Самоввод
-							</label>
-				    	</div>
-			    	</div>
-			    	<div class="col-xs-1 col-md-1">
-			    		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-			    	</div>
-				</dib>
-				<div class="row">
-					<div class="col-lg-6">
-						<textarea class = "form-control" placeholder="Вопрос"></textarea>
-						<br>
+<div class="container-fluid" style="padding-left: 0px; padding-right: -15px;">
+	<!-- Контейнер для вопоосов -->
+	<div class="content">
+		<div class="row" id="quetion-1">
+			<div class="col-xs-2 col-md-2"></div>
+			<div class="col-xs-8 col-md-8" style="padding-top: 20px; float: center;">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					
+					<div class="row">
+						<div class="col-xs-11 col-md-11"  style="padding-bottom: 20px">
+							<div class="btn-group" data-toggle="buttons">
+								<label  class="btn btn-info active">
+									<input  type="radio" class="vied-1" name="options1">
+									<i class= "glyphicon glyphicon-record" aria-hidden= "true" > </i>
+								</label>
+								<label  class="btn btn-info">
+									<input  type="radio" class="vied-1" name="options2">
+									<i class= "glyphicon glyphicon-check" aria-hidden= "true" > </i>
+								</label>
+								<label  class="btn btn-info">
+									<input  type="radio" class="vied-1" name="options3">
+									<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-1 col-md-1">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true" style="float: right; color: #efeeef; cursor:pointer;"> </span>
+						</div>
 					</div>
-				</div>
-
-				<div class="row" id="variant-1">
-		            
-					<div class="col-lg-6">
-			            <div class="input-group">
-	  						<span class="input-group-addon">
-	  							<input type="radio" name="check-1">
-	  						</span>
-	  						<input type="text" class="form-control" placeholder="Вариант ответа">
+					
+					<div class="row">
+						<div class="col-lg-11">
+							<textarea class = "form-control" placeholder="Вопрос"></textarea> <br>
 						</div>
 					</div>
 
-		        </div>
-
-				<div class="row">
-					<div class="col-xs-3 col-md-3"></div>
-					<div class="col-xs-6 col-md-6">
-						<button type="button" class="btn btn-success" id="createAnswer-1">
-							<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-							Добавить вариант ответа
-						</button>
+					<div class="row" id="variant-1">	
+						<div class="col-lg-6">
+							<div class="input-group">
+								<span class="input-group-addon">
+									<input type="radio" name="check-1">
+								</span>
+								<input type="text" class="form-control" placeholder="Вариант ответа">
+							</div>
+						</div>
 					</div>
-				</div>
 
+					<div class="row">
+						<div class="col-xs-4 col-md-4"></div>
+						<div class="col-xs-6 col-md-6">
+							<br>
+							<button type="button" class="btn btn-success" id="createAnswer-1">
+								<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+								Добавить вариант ответа
+							</button>
+						</div>
+					</div>
+
+				</div>
 			</div>
+			</div>
+			<div class="col-xs-2 col-md-2"></div>
 		</div>
 	</div>
-</div>
+	
+	<!-- Добавление нового вопроса -->
+	<div class="row" id="createQuetion">
+		<div class="col-xs-5 col-md-5"></div>
+		<div class="col-xs-2 col-md-2" style="background: #2c3f55; text-align: center;">
+		<i class=" glyphicon glyphicon-plus btn-lg" aria-hidden = "true" style="color: #efeeef; cursor:pointer;"></i>
+		</div>
+	</div>
+	
+	<br>
 
-
-</div>
-
-
-
-<div class="row">
-	<div class="col-xs-5 col-md-5"></div>
-	<div class="col-xs-2 col-md-2">
-		<img src="http://laoblogger.com/images/check-plus-clip-art-3.jpg" class="img-circle img-responsive" id="createQuetion">
+	<!-- Большая зеленная кнопка -->
+	<div class="row" style="padding-left: 0px; padding-right: 0px;">
+		<button type="button" class="btn btn-success btn-block" id="testFinal" data-toggle="modal" data-target="#myModal">
+			<h4>Завершить тест</h4>
+		</button>
 	</div>
 </div>
-<br>
 
-<div class="row">
-	<button type="button" class="btn btn-success btn-block" id="testFinal" data-toggle="modal" data-target="#myModal">
-		<h4>Завершить тест</h4>
-	</button>
-
-</div>
-
-      <!-- Modal Markup kept out of all the div elements -->
-      <div class="modal fade" id="myModal">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <!-- Modal Header -->
-                  <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Информация о тесте</h4>
-                  </div>
-                  <!-- Modal Body -->
-                  <div class="modal-body">
-                    <div class="form-group">
-		            	<label  for="nameField">Название теста</label>
-		            	<input  type="text" class="form-control" id="nameField" placeholder="Название теста"  />
-		        	</div>
-		        	<div class="form-group">
-		            	<label  for="timeField">Время прохождения</label>
-		            	<input  type="text" class="form-control" id="timeField" placeholder="Время прохождения"  />
-		        	</div>
-		        	<div class="form-group">
-		            	<label  for="categoryField">Категория</label>
-		            	<input  type="text" class="form-control" id="categoryField" placeholder="Категория"  />
-		        	</div>
-		        	<div class="form-group">
-		            	<label  for="shortInfoField">Краткая информация</label>
-		            	<input  type="text" class="form-control" id="shortInfoField" placeholder="Краткая информация"  />
-		        	</div>
-		        	<div class="form-group">
-		            	<label  for="fullInfoField">Полная информация</label>
-		            	<textarea class = "form-control" id="fullInfoField" placeholder="Полная информация"></textarea>
-		        	</div>
-                  </div>
-                  <!-- Modal Footer -->
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                      <button type="button" class="btn btn-primary" id="saveTest">Сохранить тест</button>
-                  </div>
-              </div>
+<!-- Модальное окно -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Информация о тесте</h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <div class="form-group">
+            	<label  for="nameField">Название теста</label>
+            	<input  type="text" class="form-control" id="nameField" placeholder="Название теста"  />
+        	</div>
+        	<div class="form-group">
+            	<label  for="timeField">Время прохождения</label>
+            	<input  type="text" class="form-control" id="timeField" placeholder="Время прохождения"  />
+        	</div>
+        	<div class="form-group">
+            	<label  for="categoryField">Категория</label>
+            	<input  type="text" class="form-control" id="categoryField" placeholder="Категория"  />
+        	</div>
+        	<div class="form-group">
+            	<label  for="shortInfoField">Краткая информация</label>
+            	<input  type="text" class="form-control" id="shortInfoField" placeholder="Краткая информация"  />
+        	</div>
+        	<div class="form-group">
+            	<label  for="fullInfoField">Полная информация</label>
+            	<textarea class = "form-control" id="fullInfoField" placeholder="Полная информация"></textarea>
+        	</div>
+          </div>
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+              <button type="button" class="btn btn-primary" id="saveTest">Сохранить тест</button>
           </div>
       </div>
+  </div>
+</div>
 
 
 

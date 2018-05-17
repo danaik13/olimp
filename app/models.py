@@ -40,12 +40,40 @@ class Test(models.Model):
 	сategorie = models.ForeignKey(Categorie,  on_delete=models.CASCADE, verbose_name='Категория', default=None)
 	gropUser = models.ForeignKey(GropUser,  on_delete=models.CASCADE, verbose_name='Группа пользователей', default=None)
 	dateStart = models.DateTimeField(verbose_name='Начало теста', default=None)
-	dateEnd = models.DateTimeField(verbose_name='Окончание теста', default=None)
 
+	fullInfo = models.TextField(verbose_name='Полная информация', default=None)
+	shortInfo = models.TextField(verbose_name='Краткая информация', default=None)
+	colQuition = models.IntegerField(verbose_name='Количество вопросов', default=None)
+	timeTest = models.IntegerField(verbose_name='Время на прохождение', default=None)
+	author = models.ForeignKey(User,  on_delete=models.CASCADE, verbose_name='Категория', default=None)
 	class Meta:
-	        verbose_name_plural = "Тест"
+	    verbose_name_plural = "Тест"
 	def __str__(self):              # __unicode__ on Python 2
 		return self.name
+
+class TextQuestion(models.Model):
+	textQuestion=models.TextField(verbose_name='Текст вопроса', default=None) 
+	test=models.ForeignKey(Test,  on_delete=models.CASCADE,verbose_name='Тест', default=None)
+	typeQuestion = models.CharField(max_length=10, verbose_name='Тип вопроса', default=None) 
+	class Meta:
+		verbose_name_plural = "Текст вопроса"
+	def __str__(self):              # __unicode__ on Python 2
+		return self.textQuestion
+
+class Question(models.Model):
+	question=models.ForeignKey(TextQuestion,  on_delete=models.CASCADE,verbose_name='Текст вопроса', default=None)
+	answer=models.TextField(verbose_name='Ответ', default=None)
+	boolean = models.BooleanField(verbose_name='Правильно', default=None) 
+	test=models.ForeignKey(Test,  on_delete=models.CASCADE,verbose_name='Тест', default=None)
+	class Meta:
+		verbose_name_plural = "Варианты ответа"
+	def __str__(self):              # __unicode__ on Python 2
+		return self.answer
+
+
+
+
+"""
 
 class Qwestion(models.Model):
 	answer=models.CharField(max_length=255, verbose_name='Вопрос', default=None) 
@@ -67,7 +95,7 @@ class TestQwestion(models.Model):
 		return self.qwestion
 
 class Answer(models.Model):
-	"""docstring for Answer"""
+	"" docstring for Answer""
 	answer=models.CharField(max_length=225, verbose_name='Ответ', default=None)
 	flagRightOrWrongAnswer= models.BooleanField(verbose_name='Корректность_ответа',default=None)
 	qwestion=models.ForeignKey(TestQwestion,  on_delete=models.CASCADE, verbose_name='Вопрос', default=None)	
@@ -75,3 +103,4 @@ class Answer(models.Model):
 			verbose_name_plural = "Ответ"
 	def __str__(self):              # __unicode__ on Python 2
 		return self.answer		
+"""

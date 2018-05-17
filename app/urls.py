@@ -12,14 +12,17 @@ urlpatterns = [
 	url(r'^login/$', views.login), # Регистрация
 	url(r'^logout/$', views.logout),         # Выход из учетной записи
 	url(r'^index$', views.index), # Регистрация
+	
+
+	url(r'^fullInformation/(?P<test_id>\w)/$', views.fullInformation, name="fullInformation"),
+	
+	url(r'^test/(?P<test_id>\w+)/$', views.test,  name="test"), #контент
+	url(r'^page/(\d+)/$', views.test),
+	
 	url(r'^content', views.content), #контент
-	url(r'^test', views.test), #контент
 	url(r'^rezultat', views.rezultat), #контент
-	url(r'^fullInformation', views.fullInformation), #контент
 	url(r'^adminTest', views.adminTest), #контент
 	url(r'^saveTest/$', views.saveTest), #контент 
-	url(r'^page/(\d+)/$', views.test),
-
-
+	url(r'^lichcab/$', views.lichcab), #контент
 	url(r'^', views.main), 
 ]
