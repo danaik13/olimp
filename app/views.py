@@ -71,6 +71,7 @@ def index(request):
 		context = {
 			'login' : User.objects.get(login=request.session['login']),
 			'tests' : Test.objects.all(),
+			'categories' : Categorie.objects.all(),
 		}
 		return render(request, "index.html", context)
 
@@ -137,8 +138,8 @@ def do_login(login, password):
 
 
 
-
 def test(request, page_number=1,test_id=2):
+    print(test_id)
     if connect(request):
         textQuestion=TextQuestion.objects.filter(test=test_id)
         
@@ -156,4 +157,12 @@ def test(request, page_number=1,test_id=2):
         return render_to_response('test.html',context)
     return redirect("/")
 
-
+def showTests(request, сategorie_id=None):
+    if connect(request):
+        context = {
+            'login' : User.objects.get(login=request.session['login']),
+            'tests' : Test.objects.filter(сategorie=сategorie_id),
+            'categories' : Categorie.objects.all(),
+        }
+        return render_to_response('index.html', context)
+    return redirect("/")

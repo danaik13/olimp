@@ -24,5 +24,11 @@ urlpatterns = [
 	url(r'^adminTest', views.adminTest), #контент
 	url(r'^saveTest/$', views.saveTest), #контент 
 	url(r'^lichcab/$', views.lichcab), #контент
+
+	url(r'^index/(?P<сategorie_id>\w)/$', views.showTests,  name="сategorie"), #контент
+
+
+
+
 	url(r'^', views.main), 
 ]
