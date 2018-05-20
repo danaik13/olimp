@@ -12,7 +12,7 @@ urlpatterns = [
 	url(r'^login/$', views.login), # Регистрация
 	url(r'^logout/$', views.logout),         # Выход из учетной записи
 	url(r'^index$', views.index), # Регистрация
-	
+	url(r'^index_page/(\d+)/$', views.index),
 	url(r'^page/(\d+)/$', views.test),
 	url(r'^fullInformation/(?P<test_id>\w+)/$', views.fullInformation, name="fullInformation"),
 	
@@ -20,8 +20,10 @@ urlpatterns = [
 	
 	url(r'^startTest/(?P<test_id>\w+)/$', views.startTest, name="startTest"), #Пользователь начал проходить тест
 	
+	url(r'^timer', views.timer, name="timer"),
+
+
 	url(r'^index/(?P<сategorie_id>\w)/$', views.showTests,  name="сategorie"), #контент
-	url(r'^timer/$', views.timer),
 	url(r'^content', views.content), #контент
 	url(r'^rezultat', views.rezultat), #контент
 	url(r'^adminTest', views.adminTest), #контент

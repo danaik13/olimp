@@ -50,6 +50,28 @@
 					</div>
 				</div>
 			{% endfor %}
+                <!--навигация тестовых страниц -->
+		        <div class="row">
+		            <div class="large-3 large-offset-5 columns">
+		                <ul class="pager">
+		                    {% if tests.has_previous %}
+		                        <li><a href="/index_page/{{ tests.previous_page_number }}/"><<</a></li>
+		                    {% endif %}
+					            {% for page in tests.paginator.page_range %}
+					                {% if page == tests.number %}
+					                    <li>
+					                    	<a href="/index_page/{{ page }}/">{{ page }}</a></li>
+					                {% else %}
+					                    <li>
+					                    	<a href="/index_page/{{ page }}/">{{ page }}</a></li>
+					                {% endif %}
+					            {% endfor %}						
+		                    {% if tests.has_next %}
+		                        <li><a href="/index_page/{{ tests.next_page_number }}/">>></a></li>
+		                    {% endif %}
+		                </ul>
+		            </div>
+       			 </div>     			
 		</div>
 	</div>
 </div>
