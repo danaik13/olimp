@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{%load staticfiles%}
+{% block test %}
+<div class="row">
+    <!-- Отступ слево -->
+	<div class="col-xs-1 col-md-1"></div>
+    <!-- Центр контента -->
+	<div class="col-xs-10 col-md-10">
+        <!--нумерация страниц -->
+        <ul class="pagination pagination-sm">
+            {% for page in qwestions.paginator.page_range %}
+                {% if page == qwestions.number %}
+                    <li class="current"><a href="/page/{{ page }}/">{{ page }}</a></li>
+                {% else %}
+                    <li><a href="/page/{{ page }}/">{{ page }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <!-- блок вопроса -->
+        <div class="panel panel-primary">
+        	{% for qwestion in qwestions %}   
+                <div class="panel-heading">
+                    <h4>{{qwestion.textQuestion}}</a></h4>
+                </div>
+
+                <div class="answer">
+                    {% for answer in answers %}
+            	        	{% for ans in answer %}
+                                <p>   
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="{{qwestion.typeQuestion}}" name="check">
+                                        </span>
+                                        <input type="text" class="form-control" value="{{ans}}">
+                                    </div>
+                                </p>
+            				{% endfor %}
+            		{% endfor %}
+            	</div>
+            {% endfor %}
+        </div>
+
+        <!--кнопки следующий/ответить/далее -->
+        <div class="row">
+            <div class="large-3 large-offset-5 columns">
+                <ul class="pager">
+                    {% if qwestions.has_previous %}
+                        <li><a href="/page/{{ qwestions.previous_page_number }}/">Предыдущий</a></li>
+                    {% else %}
+                        <li><a href="">Начало</a></li>
+                    {% endif %}
+                    
+                    
+                    {% if qwestions.has_next %}
+                        <li><a href="/page/{{ qwestions.next_page_number }}/" id="answer">Ответить</a></li>
+                    {% else %}
+                        <li><a href="">Ответить</a></li>
+                    {% endif %}
+
+
+                    {% if qwestions.has_next %}
+                        <li><a href="/page/{{ qwestions.next_page_number }}/">Следующий</a></li>
+                    {% else %}
+                        <li><a href="">Конец</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    /* Ответить на вопрос в тесте */
+    $("#answer").click(function(){
+        var i = 0, arr = [];
+
+        $(".input-group").each(function(){
+            if($("input[name=check]", this).prop("checked")){
+                arr.push($(".form-control", this).val());
+            }
+        });
+        
+        $.ajax({
+            type: "GET",
+            url: "/../answer",
+            dataType: 'json',
+            data: {
+                'quetion' : $("h4").text(),
+                'answer' : JSON.stringify(arr),
+            },
+        })
+    });
+
+</script>
+
+
+{% endblock %}

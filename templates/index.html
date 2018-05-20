@@ -1,32 +1,39 @@
 {% extends 'base.html' %}
 {% block index %}
 
-<div class="container-fluid" style="padding-left: 0px;">
+<div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
 	<div class="row" style="height: 90vh; background: rgba(0,0,0, 0.6);">
-		<div class="col-xs-3 col-md-3" style="padding-top: 20px">
-			<div class="btn-group-vertical" style="padding-left: 15px;">			
+		<div class="col-xs-2 col-md-2" style="padding-top: 20px">
+			<div class="btn-group-vertical" style="padding-left: 15px;">
 				<div class="btn-group">
+					<form action="{% url 'main'  %}">
+					    <button type="submit" class="btn btn-lg dropdown-toggle"  style="background: transparent; margin-bottom:-10px;">
+						<p href="/" style="color: #a5b2bd; float: left; font-size: 90%; font-weight: 750;">Все</p></button>
+					    </button>
+					</form>
 				{% for categorie in categories %}				
-				<form action="{% url 'сategorie' сategorie_id=categorie.id  %}">
-				    <button type="submit" class="btn btn-lg dropdown-toggle"  style="background: transparent; margin-bottom:-10px;">
-					<p style="color: #a5b2bd; float: left; font-size: 90%; font-weight: 750;">{{categorie.сategorie}}</p></button>
-				    </button>
-				</form>
+					<form action="{% url 'сategorie' сategorie_id=categorie.id  %}">
+					    <button type="submit" class="btn btn-lg dropdown-toggle"  style="background: transparent; margin-bottom:-10px;">
+						<p style="color: #a5b2bd; float: left; font-size: 90%; font-weight: 750;">{{categorie.сategorie}}</p></button>
+					    </button>
+					</form>
 				{% endfor %}
 				</div>
 			</div>
 		</div>
 
-		
-		<div class="col-xs-9 col-md-9" style="background: #f7f7f7;">
+		<div class="col-xs-10 col-md-10" style="background: #f7f7f7; ">
 			{% for test in tests %}
-			<div class="row" style="padding-top: 20px">
-					<div class="col-xs-12 col-md-12">
+				<div class="row" style="padding-top: 20px">
+					<div class="col-xs-1 col-md-1"></div>
+					<div class="col-xs-8 col-md-8">
 						<div class="panel panel-default">
 							<div class="panel-body"> 
-								<h4><a href="{% url 'fullInformation' test_id=test.id %}" style="color: #525963; font-weight: 750;">{{test.name}}</a></h4>
+								<h4><a href="{% url 'fullInformation' test_id=test.id %}" style="color: #525963; font-weight: 750; text-transform: uppercase;">{{test.name}}</a></h4>
 								<p>{{test.shortInfo}}</p>
+
 								<div class="row">
+									<div class="col-xs-1 col-md-1"></div>
 									<div class="col-xs-4 col-md-4">
 										<span class="glyphicon glyphicon-check" aria-hidden="true" style="color: #455c73"> Создано {{test.dateStart | date:'d.m.Y' }}</span>
 									</div>
@@ -36,14 +43,14 @@
 									<div class="col-xs-3 col-md-3">
 										<span class="glyphicon glyphicon-signal" aria-hidden="true" style="color: #455c73"> Пройдено 0</span>
 									</div>
-									<div class="col-xs-3 col-md-3"></div>
 								</div>
+
 							</div>
 						</div>
 					</div>
 				</div>
 			{% endfor %}
-
 		</div>
 	</div>
+</div>
 {% endblock %}

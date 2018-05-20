@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block lichCab %}
+
+<ul class="nav nav-tabs">
+	<li class="active"><a href="#profile" data-toggle="tab">Профиль</a></li>
+	<li><a  href="#test" data-toggle="tab">Мои тесты</a></li>
+	<li><a  href="#statistic" data-toggle="tab">Статистика</a></li>
+</ul>
+
+<!-- Tab panes  -->
+<div class="tab-content">
+	<div class="tab-pane active" id="profile">
+		<div class="row">
+			<div class="col-xs-1 col-md-1"></div>
+			<div class="col-xs-6 col-md-4">
+				<br>
+				<img src="http://nigellear.com/wp-content/uploads/2015/08/RTEmagicC_Homer_Simpson_txdam74316_b69f17.jpg" alt="..." class="img-rounded img-responsive" >
+
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<h3>Личные данные</h3>
+
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Иванов">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Степан">
+					<div class="input-group-btn">
+					    <button type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+						</button>
+
+					</div>
+				</div>
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Александрович">
+					<div class="input-group-btn">
+					    <button type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
+
+				<h3>Смена пароля</h3>
+				<input type="password" class="form-control" placeholder="Старый пароль">
+				<input type="password" class="form-control" placeholder="Новый пароль">
+				<input type="password" class="form-control" placeholder="Повторите пароль">
+
+				<button type="submit" class="btn btn-primary">Изменить</button>
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane" id="test">
+<br>		
+<div class="row">
+	<div class="col-xs-2 col-md-2"></div>
+	<div class="col-xs-8 col-md-8"> 
+		<div class="panel panel-default">
+			<div class="panel-body"> 
+			 	<h3><a href="">Название теста</a></h1>
+			 	<p>Тут типо небольшое описание того, для чего и почему сделан этот тест. Что ждет проходящего,смысл жизни, ну и вообще звони на телефон 9876546851, а то скучно. жду</p>
+			 	<div class="row">
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-check" aria-hidden="true"> Создано 7.04.2018</span>
+			 			
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"> Информатика</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-signal" aria-hidden="true"> Пройдено 500</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">Результат: 100% </div>
+			 	</div>
+        	</div>
+ 		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-2 col-md-2"></div>
+	<div class="col-xs-8 col-md-8"> 
+		<div class="panel panel-default">
+			<div class="panel-body"> 
+			 	<h3><a href="">Название теста</a></h1>
+			 	<p>Тут типо небольшое описание того, для чего и почему сделан этот тест. Что ждет проходящего,смысл жизни, ну и вообще звони на телефон 9876546851, а то скучно. жду</p>
+			 	<div class="row">
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-check" aria-hidden="true"> Создано 7.04.2018</span>
+			 			
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"> Информатика</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">
+			 			<span class="glyphicon glyphicon-signal" aria-hidden="true"> Пройдено 500</span>
+			 		</div>
+			 		<div class="col-xs-3 col-md-3">Результат: 99% </div>
+			 	</div>
+        	</div>
+ 		</div>
+	</div>
+</div>
+
+	</div>
+	<div class="tab-pane" id="statistic">
+		<h3>Messages central</h3>
+	</div>
+</div>
+
+
+
+
+
+
+
+{% endblock %} 

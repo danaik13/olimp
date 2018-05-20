@@ -4,14 +4,23 @@ body{
 	min-width: 722px;
 	background-image:'{% static "fon.jpg" %}'; 
 	background-repeat:no-repeat;
-    /*background-attachment:fixed; */
-    /*background-position:right 400px top;*/
-	background-size: 100%; 
-	font-family: 'Open Sans', sans-serif;
-
-
+    background-attachment:fixed;
+    background-position:right 400px top;
+/*background-size: 100%;*/
 }
 
+.main{
+	font-family: 'Open Sans', sans-serif;
+}
+
+#logo{
+	font-family: 'Comfortaa', cursive; 
+	font-size: 220%; 
+	font-weight: 750; 
+	text-decoration: none; 
+	cursor:pointer;
+	color: #9c9e9c;
+}
 #fon{
 	background-repeat:no-repeat;
 	width: 100%;
@@ -24,4 +33,8 @@ body{
 	width: 100%;
 	height: 100%;
 	position:fixed;
+}
+
+#timer{
+	color:#fff;
 }

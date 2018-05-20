@@ -13,22 +13,19 @@ urlpatterns = [
 	url(r'^logout/$', views.logout),         # Выход из учетной записи
 	url(r'^index$', views.index), # Регистрация
 	
-
-	url(r'^fullInformation/(?P<test_id>\w)/$', views.fullInformation, name="fullInformation"),
-	
-	url(r'^test/(?P<test_id>\w+)/$', views.test,  name="test"), #контент
 	url(r'^page/(\d+)/$', views.test),
+	url(r'^fullInformation/(?P<test_id>\w+)/$', views.fullInformation, name="fullInformation"),
 	
+	url(r'^answer', views.answer),
+	
+	url(r'^startTest/(?P<test_id>\w+)/$', views.startTest, name="startTest"), #Пользователь начал проходить тест
+	
+	url(r'^index/(?P<сategorie_id>\w)/$', views.showTests,  name="сategorie"), #контент
+	url(r'^timer/$', views.timer),
 	url(r'^content', views.content), #контент
 	url(r'^rezultat', views.rezultat), #контент
 	url(r'^adminTest', views.adminTest), #контент
 	url(r'^saveTest/$', views.saveTest), #контент 
 	url(r'^lichcab/$', views.lichcab), #контент
-
-	url(r'^index/(?P<сategorie_id>\w)/$', views.showTests,  name="сategorie"), #контент
-
-
-
-
-	url(r'^', views.main), 
+	url(r'^', views.main,  name="main"), 
 ]

@@ -17,6 +17,9 @@
                 {% endif %}
             {% endfor %}
         </ul>
+
+        <div id="timer"></div>
+
         <!-- блок вопроса -->
         <div class="panel panel-primary">
         	{% for qwestion in qwestions %}   
@@ -24,13 +27,13 @@
                     <h4>{{qwestion.textQuestion}}</a></h4>
                 </div>
 
-                <div>
+                <div class="answer">
                     {% for answer in answers %}
             	        	{% for ans in answer %}
                                 <p>   
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <input type="radio" name="check">
+                                            <input type="{{qwestion.typeQuestion}}" name="check">
                                         </span>
                                         <input type="text" class="form-control" value="{{ans}}">
                                     </div>
@@ -47,14 +50,18 @@
                 <ul class="pager">
                     {% if qwestions.has_previous %}
                         <li><a href="/page/{{ qwestions.previous_page_number }}/">Предыдущий</a></li>
-                    {% else %}
-                        <li><a href="">Начало</a></li>
                     {% endif %}
-                    <li><a href="#" id="answer">Ответить</a></li>
+                    
+                    
+                    {% if qwestions.has_next %}
+                        <li><a href="/page/{{ qwestions.next_page_number }}/" id="answer">Ответить</a></li>
+                    {% else %}
+                        <li><a href="/page/1/">Ответить</a></li>
+                    {% endif %}
+
+
                     {% if qwestions.has_next %}
                         <li><a href="/page/{{ qwestions.next_page_number }}/">Следующий</a></li>
-                    {% else %}
-                        <li><a href="">Конец</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -62,4 +69,36 @@
 
     </div>
 </div>
+
+<script>
+/* Ответить на вопрос в тесте */
+$("#answer").click(function(){
+    var i = 0, arr = [];
+
+    $(".input-group").each(function(){
+        if($("input[name=check]", this).prop("checked")){
+            arr.push($(".form-control", this).val());
+        }
+    });
+    
+    $.ajax({
+        type: "GET",
+        url: "/../answer",
+        dataType: 'json',
+        data: {
+            'quetion' : $("h4").text(),
+            'answer' : JSON.stringify(arr),
+        },
+    })
+});
+   
+show();
+$(document).ready(function(){
+    setInterval('show()',1000);
+});
+
+</script>
+
+
+
 {% endblock %}

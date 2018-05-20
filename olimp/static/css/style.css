@@ -1,0 +1,28 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+body{
+	min-width: 722px;
+	background-image:'{% static "fon.jpg" %}'; 
+	background-repeat:no-repeat;
+    /*background-attachment:fixed; */
+    /*background-position:right 400px top;*/
+	background-size: 100%; 
+	font-family: 'Open Sans', sans-serif;
+
+
+}
+
+#fon{
+	background-repeat:no-repeat;
+	width: 100%;
+	height: 100%;
+	background-attachment:;
+	position:fixed;
+}
+#darkening{
+	background: rgba(0,0,0, 0.6);
+	width: 100%;
+	height: 100%;
+	position:fixed;
+}
+

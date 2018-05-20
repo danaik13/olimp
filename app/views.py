@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response, redirect, render
 from django.http import HttpResponse
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import get_template
-
+import json
 import hashlib
+
 # Create your views here.
 
 def connect(request):
@@ -95,8 +96,37 @@ def saveTest(request):
 		categoryField = request.GET['categoryField']
 		shortInfoField = request.GET['shortInfoField']
 		fullInfoField = request.GET['fullInfoField']
+		gropUser = request.GET['gropUser']
+		colQuition = request.GET['colQuition']
 
-		print(nameField)
+		test = Test.objects.create(
+			name = nameField, 
+			сategorie = Categorie.objects.get(сategorie=categoryField),
+			gropUser = GropUser.objects.get(gropUser=gropUser),
+			dateStart = datetime.now(), 
+			fullInfo = fullInfoField,
+			shortInfo = shortInfoField,
+			colQuition = colQuition,
+			timeTest = timeField,
+			author = User.objects.get(login=request.session['login']),
+		)
+		ajax = request.GET['ajax']
+		python_obj = json.loads(ajax)
+		for element in python_obj:
+			textQuestion = TextQuestion.objects.create(
+				textQuestion = element['quetionText'],
+				test = test,
+				typeQuestion = element['type'],
+			)
+			variants = json.loads(element['variant'])
+			for variant in variants:
+				question = Question.objects.create(
+					question = textQuestion,
+					answer = variant['text'], 
+					boolean = variant['check'],
+					test = test,
+				)
+		return render(request, "adminTest.html")
 	return redirect("/")
 
 
@@ -108,8 +138,11 @@ def fullInformation(request,test_id):
 
 def adminTest(request):
 	if connect(request):
-
-		return render(request, "adminTest.html")
+		context = {
+			'Categorie': Categorie.objects.all(),
+			'GropUser' : GropUser.objects.all(),
+		}
+		return render(request, "adminTest.html", context)
 
 	return redirect("/")
 	
@@ -118,12 +151,6 @@ def content(request):
 		return render(request, "content.html")
 	return redirect("/")
 
-'''	
-def test(request):
-	if connect(request):
-		return render(request, "test.html")
-	return redirect("/")
-'''
 def do_login(login, password):
 	try:
 		user = User.objects.get(login=login)
@@ -136,26 +163,75 @@ def do_login(login, password):
 	session.save()
 	return session.key
 
+def startTest(request, test_id):
+	createStartTest = StartTest.objects.create(
+		timeStartTest = datetime.now(),
+		test = Test.objects.get(id=test_id),
+		user = User.objects.get(login=request.session['login']),
+		rezult = 0,
+	)
+	return redirect("/page/1/")
+
+def answer(request):
+	if connect(request):
+		if request.method == 'GET':
+			ajax_quetion = request.GET['quetion']
+			ajax_answer = request.GET['answer']
+			data  = json.loads(ajax_answer)
+			
+			user = User.objects.get(login=request.session['login'])
+			startTest = StartTest.objects.filter(user = user).last()
+			idQuestion = TextQuestion.objects.get(textQuestion = ajax_quetion, test = startTest.test)
+
+			boolean = False
+			if idQuestion.typeQuestion == "radio":
+				if str(data)[2:-2] == Question.objects.get(question=idQuestion, boolean=True, test = startTest.test).answer:
+					startTest.rezult += 1
+					startTest.save()
+					boolean = True
+				
+				createAnswer = Answer.objects.create(
+					idQuestion = idQuestion,
+					boolean = boolean,
+					timeAnswer = datetime.now(), 
+					startTest = StartTest.objects.get(id=startTest.id),
+				)
+				# ДОБАВИТЬ CHECKBOX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				#for ans in data:
+				#print(ans)
+		return render(request, "test.html")
+	return redirect("/")
+
+def test(request, page_number=1):
+	if connect(request):
+		user = User.objects.get(login=request.session['login'])
+		lastData = StartTest.objects.filter(user = user).last()
+		
+		if lastData.timeFinishTest != None:
+			return redirect("/rezultat")
+
+		allAnswer = Answer.objects.filter(startTest=lastData)
+		if len(allAnswer)==lastData.test.colQuition:
+			return redirect("/rezultat")
 
 
-def test(request, page_number=1,test_id=2):
-    print(test_id)
-    if connect(request):
-        textQuestion=TextQuestion.objects.filter(test=test_id)
-        
-        columl_qwestion = 1
-        qwestions_page = Paginator(textQuestion, columl_qwestion)
-        temp=[]
-        for tq in textQuestion:
-            temp.append(Question.objects.filter(question=tq))
-        answer_page = Paginator(temp, columl_qwestion)
 
-        context={
-                 'qwestions':qwestions_page.page(page_number),
-                 'answers':answer_page.page(page_number),
-        }
-        return render_to_response('test.html',context)
-    return redirect("/")
+		test_id = Test.objects.get(id=lastData.test.id)
+		textQuestion=TextQuestion.objects.filter(test=test_id)
+		
+		columl_qwestion = 1
+		qwestions_page = Paginator(textQuestion, columl_qwestion)
+		temp=[]
+		for tq in textQuestion:
+			temp.append(Question.objects.filter(question=tq))
+		answer_page = Paginator(temp, columl_qwestion)
+
+		context={
+			'qwestions':qwestions_page.page(page_number),
+			'answers':answer_page.page(page_number),
+		}
+		return render_to_response('test.html',context)
+	return redirect("/")
 
 def showTests(request, сategorie_id=None):
     if connect(request):
@@ -166,3 +242,23 @@ def showTests(request, сategorie_id=None):
         }
         return render_to_response('index.html', context)
     return redirect("/")
+
+def timer(request):
+	if connect(request):
+		user = User.objects.get(login=request.session['login'])
+		lastData = StartTest.objects.filter(user = user).last()
+		sd = lastData.timeStartTest
+		timeTest = lastData.test.timeTest
+		now = datetime.now(timezone.utc)
+		diff = sd + timedelta(minutes=timeTest) - now
+		'''
+		st = lastData.timeStartTest
+		now = datetime.now(timezone.utc)
+		diff =  st - now
+		if diff.seconds >= (lastData.test.timeTest*60):
+			lastData.timeFinishTest = datetime.now()
+			lastData.save()
+		return render(request, 'timer.html', {"left": diff.seconds//60, 'diff':str(diff)[5:7]} )
+		'''
+		return render(request, 'timer.html', {"left": str(diff)[0:7]})
+	return redirect("/")
