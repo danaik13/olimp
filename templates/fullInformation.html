@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block fullInformation %}
-	<div class="row">
-	<div class="col-xs-3 col-md-3"></div>
+	<div class="row" id="panelTest">
+	<div class="col-xs-2 col-md-2" style="margin-right:-14px;"></div>
 	<div class="col-xs-8 col-md-8"> 
-		<div class="panel panel-default">
+		<div class="panel panel-default" id="panel1">
 			
 			<div class="panel-body"> 
-			 	<h3><a href="">{{test.name}}</a></h1>
+			 	<h3 id="nameTest">{{test.name}}</h3>
 			 	<p> <b>Автор:</b> {{test.author}}	</p>
 			 	<p> <b>Полная информация:</b> 
 					{{test.fullInfo}}
@@ -18,7 +18,8 @@
         	</div>
 
  		</div>
- 		<a href="{% url 'startTest' test_id=test.id %}" type="submit" class="btn btn-primary">Начать тест</a>
+		<div class="col-xs-5 col-md-5"></div>
+ 		<a href="{% url 'startTest' test_id=test.id %}" type="submit" class="btn btn-primary" id="NachatTest">Начать тест</a>
 	</div>
 </div>
 {% endblock %} 

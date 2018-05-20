@@ -67,12 +67,15 @@ def logout(request):
     request.session.flush()
     return redirect("/")
 
-def index(request):
+def index(request,page_number=1):
 	if connect(request):
+		columl_test = 4
+		tests_page = Paginator(Test.objects.all(), columl_test)
 		context = {
 			'login' : User.objects.get(login=request.session['login']),
-			'tests' : Test.objects.all(),
+			'tests' : tests_page.page(page_number),
 			'categories' : Categorie.objects.all(),
+
 		}
 		return render(request, "index.html", context)
 
@@ -82,7 +85,6 @@ def lichcab(request):
 	if connect(request):
 		return render(request, "lichCab.html")
 	return redirect("/")
-
 
 def rezultat(request):
 	if connect(request):
@@ -129,7 +131,6 @@ def saveTest(request):
 		return render(request, "adminTest.html")
 	return redirect("/")
 
-
 def fullInformation(request,test_id):
 	if connect(request):
 		test = Test.objects.get(id=test_id)
@@ -143,7 +144,6 @@ def adminTest(request):
 			'GropUser' : GropUser.objects.all(),
 		}
 		return render(request, "adminTest.html", context)
-
 	return redirect("/")
 	
 def content(request):
@@ -178,14 +178,30 @@ def answer(request):
 			ajax_quetion = request.GET['quetion']
 			ajax_answer = request.GET['answer']
 			data  = json.loads(ajax_answer)
-			
 			user = User.objects.get(login=request.session['login'])
 			startTest = StartTest.objects.filter(user = user).last()
 			idQuestion = TextQuestion.objects.get(textQuestion = ajax_quetion, test = startTest.test)
-
 			boolean = False
 			if idQuestion.typeQuestion == "radio":
+				print(str(data)[2:-2])
 				if str(data)[2:-2] == Question.objects.get(question=idQuestion, boolean=True, test = startTest.test).answer:
+					startTest.rezult += 1
+					startTest.save()
+					boolean = True	
+				createAnswer = Answer.objects.create(
+					idQuestion = idQuestion,
+					boolean = boolean,
+					timeAnswer = datetime.now(), 
+					startTest = StartTest.objects.get(id=startTest.id),
+				)
+				# ДОБАВИТЬ CHECKBOX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				#for ans in data:
+				#print(ans)
+			buff=Question.objects.filter(question=idQuestion, boolean=True, test = startTest.test)
+			print(buff)
+			if idQuestion.typeQuestion == "checkbox":
+				buff=Question.objects.filter(question=idQuestion, boolean=True, test = startTest.test).answer
+				if len(list(set(buff) & set(str(data))))==0:
 					startTest.rezult += 1
 					startTest.save()
 					boolean = True
@@ -196,9 +212,6 @@ def answer(request):
 					timeAnswer = datetime.now(), 
 					startTest = StartTest.objects.get(id=startTest.id),
 				)
-				# ДОБАВИТЬ CHECKBOX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				#for ans in data:
-				#print(ans)
 		return render(request, "test.html")
 	return redirect("/")
 
@@ -214,8 +227,6 @@ def test(request, page_number=1):
 		if len(allAnswer)==lastData.test.colQuition:
 			return redirect("/rezultat")
 
-
-
 		test_id = Test.objects.get(id=lastData.test.id)
 		textQuestion=TextQuestion.objects.filter(test=test_id)
 		
@@ -230,18 +241,26 @@ def test(request, page_number=1):
 			'qwestions':qwestions_page.page(page_number),
 			'answers':answer_page.page(page_number),
 		}
+
+		if clicTimer(user)==True:
+			context={
+
+			}
+			return render_to_response('rezultat.html',context)		
 		return render_to_response('test.html',context)
 	return redirect("/")
 
-def showTests(request, сategorie_id=None):
-    if connect(request):
-        context = {
-            'login' : User.objects.get(login=request.session['login']),
-            'tests' : Test.objects.filter(сategorie=сategorie_id),
-            'categories' : Categorie.objects.all(),
-        }
-        return render_to_response('index.html', context)
-    return redirect("/")
+def showTests(request, сategorie_id=None,page_number=1):
+	if connect(request):
+		columl_test = 4
+		tests_page = Paginator(Test.objects.filter(сategorie=сategorie_id), columl_test)
+		context = {
+			'login' : User.objects.get(login=request.session['login']),
+			'tests' : tests_page.page(page_number),
+			'categories' : Categorie.objects.all(),
+		}
+		return render_to_response('index.html', context)
+	return redirect("/")
 
 def timer(request):
 	if connect(request):
@@ -251,6 +270,12 @@ def timer(request):
 		timeTest = lastData.test.timeTest
 		now = datetime.now(timezone.utc)
 		diff = sd + timedelta(minutes=timeTest) - now
+		#testEnd=timeTest+datetime.now(timezone.utc)	
+		diffformat=str(diff).split(".")
+
+		if diffformat[0]=="0:00:00"or"-"in diffformat[0]:
+
+			return render_to_response('timer.html' ,{"left": str('0:00:00 <-Время вышло!')})
 		'''
 		st = lastData.timeStartTest
 		now = datetime.now(timezone.utc)
@@ -262,3 +287,23 @@ def timer(request):
 		'''
 		return render(request, 'timer.html', {"left": str(diff)[0:7]})
 	return redirect("/")
+
+def rezult(request, ):
+	if connect(request):
+		user = User.objects.get(login=request.session['login'])
+		
+		return render_to_response("rezultat.html")
+	return redirect("/")
+
+
+def clicTimer(user):
+	lastData = StartTest.objects.filter(user = user).last()
+	sd = lastData.timeStartTest
+	timeTest = lastData.test.timeTest
+	now = datetime.now(timezone.utc)
+	diff = sd + timedelta(minutes=timeTest) - now	
+	diffformat=str(diff).split(".")
+	flag=False
+	if diffformat[0]=="0:00:00"or"-"in diffformat[0]:
+		flag=True
+	return flag

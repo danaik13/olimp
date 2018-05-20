@@ -2,45 +2,46 @@
 
 {%load staticfiles%}
 {% block test %}
-<div class="row">
+<div class="row" id="panelTest">
     <!-- Отступ слево -->
-	<div class="col-xs-1 col-md-1"></div>
-    <!-- Центр контента -->
-	<div class="col-xs-10 col-md-10">
-        <!--нумерация страниц -->
+    <div class="col-xs-2 col-md-2" style="margin-right:-14px;">
+    <!--нумерация страниц -->
         <ul class="pagination pagination-sm">
             {% for page in qwestions.paginator.page_range %}
                 {% if page == qwestions.number %}
-                    <li class="current"><a href="/page/{{ page }}/">{{ page }}</a></li>
+                    <li class="current"><a href="/page/{{ page }}/" id="page">{{ page }}</a></li>
                 {% else %}
-                    <li><a href="/page/{{ page }}/">{{ page }}</a></li>
+                    <li><a href="/page/{{ page }}/" id="page">{{ page }}</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
+    </div>
+    <!-- Центр контента -->
+    <div class="col-xs-9 col-md-9">
 
         <div id="timer"></div>
 
         <!-- блок вопроса -->
-        <div class="panel panel-primary">
-        	{% for qwestion in qwestions %}   
-                <div class="panel-heading">
+        <div class="panel panel-primary" id="panel2">
+            {% for qwestion in qwestions %}   
+                <div class="panel-heading" id="panelVop">
                     <h4>{{qwestion.textQuestion}}</a></h4>
                 </div>
 
                 <div class="answer">
                     {% for answer in answers %}
-            	        	{% for ans in answer %}
+                            {% for ans in answer %}
                                 <p>   
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <input type="{{qwestion.typeQuestion}}" name="check">
                                         </span>
-                                        <input type="text" class="form-control" value="{{ans}}">
+                                        <input type="text" disabled class="form-control" value="{{ans}}" id="otvet">
                                     </div>
                                 </p>
-            				{% endfor %}
-            		{% endfor %}
-            	</div>
+                            {% endfor %}
+                    {% endfor %}
+                </div>
             {% endfor %}
         </div>
 
@@ -49,19 +50,19 @@
             <div class="large-3 large-offset-5 columns">
                 <ul class="pager">
                     {% if qwestions.has_previous %}
-                        <li><a href="/page/{{ qwestions.previous_page_number }}/">Предыдущий</a></li>
+                        <li><a href="/page/{{ qwestions.previous_page_number }}/" id="strelka"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a></li>
                     {% endif %}
                     
                     
                     {% if qwestions.has_next %}
                         <li><a href="/page/{{ qwestions.next_page_number }}/" id="answer">Ответить</a></li>
                     {% else %}
-                        <li><a href="/page/1/">Ответить</a></li>
+                        <li><a href="/page/1/" id="answer2">Ответить</a></li>
                     {% endif %}
 
 
                     {% if qwestions.has_next %}
-                        <li><a href="/page/{{ qwestions.next_page_number }}/">Следующий</a></li>
+                        <li><a href="/page/{{ qwestions.next_page_number }}/" id="strelka"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></li>
                     {% endif %}
                 </ul>
             </div>

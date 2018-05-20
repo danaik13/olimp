@@ -2,7 +2,7 @@
 {% block index %}
 
 <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
-	<div class="row" style="height: 90vh; background: rgba(0,0,0, 0.6);">
+	<div class="row">
 		<div class="col-xs-2 col-md-2" style="padding-top: 20px">
 			<div class="btn-group-vertical" style="padding-left: 15px;">
 				<div class="btn-group">
@@ -50,6 +50,28 @@
 					</div>
 				</div>
 			{% endfor %}
+                <!--навигация тестовых страниц -->
+		        <div class="row">
+		            <div class="large-3 large-offset-5 columns">
+		                <ul class="pager">
+		                    {% if tests.has_previous %}
+		                        <li><a href="/index_page/{{ tests.previous_page_number }}/"><<</a></li>
+		                    {% endif %}
+					            {% for page in tests.paginator.page_range %}
+					                {% if page == tests.number %}
+					                    <li>
+					                    	<a href="/index_page/{{ page }}/">{{ page }}</a></li>
+					                {% else %}
+					                    <li>
+					                    	<a href="/index_page/{{ page }}/">{{ page }}</a></li>
+					                {% endif %}
+					            {% endfor %}						
+		                    {% if tests.has_next %}
+		                        <li><a href="/index_page/{{ tests.next_page_number }}/">>></a></li>
+		                    {% endif %}
+		                </ul>
+		            </div>
+       			 </div>     			
 		</div>
 	</div>
 </div>
