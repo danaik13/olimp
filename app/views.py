@@ -223,20 +223,29 @@ def test(request, page_number=1):
 	if connect(request):
 		user = User.objects.get(login=request.session['login'])
 		lastData = StartTest.objects.filter(user = user).last()
-
+		test_id = Test.objects.get(id=lastData.test.id)
+		textQuestion=TextQuestion.objects.filter(test=test_id)		
+		allAnswer = Answer.objects.filter(startTest=lastData)
+		
 		if lastData.timeFinishTest != None:
 			return redirect("/rezultat")
 
-		allAnswer = Answer.objects.filter(startTest=lastData)
+		
 		if allAnswer.count() == lastData.test.colQuition:
 			return redirect("/rezultat")
-		
-		if clicTimer(user):
-			return redirect("/rezultat")
 
-		test_id = Test.objects.get(id=lastData.test.id)
-		textQuestion=TextQuestion.objects.filter(test=test_id)
-		
+
+		if clicTimer(user):
+			tryAnswers=test_id.colQuition
+			userAnswers=lastData.rezult
+			rezultat=(userAnswers*100)/tryAnswers
+			print(tryAnswers)
+			print(userAnswers)
+			print(rezultat)
+
+			return render_to_response('rezultat.html', {"left": str(rezultat)+"%"})
+			#return redirect("/rezultat")
+	
 		columl_qwestion = 1
 		qwestions_page = Paginator(textQuestion, columl_qwestion)
 		temp=[]
@@ -264,6 +273,16 @@ def showTests(request, сategorie_id=None,page_number=1):
 		}
 		return render_to_response('index.html', context)
 	return redirect("/")
+'''
+def getRezult(request):
+	if connect(request):
+		user = User.objects.get(login=request.session['login'])
+		tryAnswer=Test.objects.filtres()
+		userAnswer=StartTest.objects.filtres(user=user,timeFinishTest).rezult
+		rezultat=tryAnswer/100*userAnswer
+		return render(request, 'rezultat.html', {"left": rezultat})
+	return redirect("/")
+'''
 
 def timer(request):
 	if connect(request):
