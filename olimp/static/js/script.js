@@ -1,77 +1,15 @@
+function show(){
+    $.get("/timer/", function(data) {
+        $("#timer").html(data);
+    });
+    console.log($("#timer").text());
+    if ($("#timer").text() == '0:00:00 <-Время вышло!'){
+    	location.reload();
+    }
+}
 $(document).ready(function(){
 
 	var numberAll = 2;
-
-
-	
-	
-
-
-    $("#testFinal").click(function(){
-
-		var jsonObj = {
-		    members: {
-	            host: "hostName",
-	            viewers: {
-	                user1: "value1",
-	                user2: "value2",
-	                user3: "value3"
-	            }
-	        }
-		}
-
-		var i;
-
-		for(i=4; i<=8; i++){
-		    var newUser = "user" + i;
-		    var newValue = "value" + i;
-		    jsonObj.members.viewers[newUser] = newValue;
-		}
-
-		var ajax = {};
-
-        $(".content").children().each(function(){
-			
-			var id = $(this).attr("id");
-			ajax[id] = [];
-
-			//var a = ajax[ Object.keys(ajax).pop() ];
-
-			ajax[ Object.keys(ajax).pop() ].variants = "saasa";
-			console.log(ajax);
-
-			var quetionText = $("textarea", this).val();
-			//ajax.[id][quetionText] = quetionText;
-			
-			var variants = [];
-			$(".input-group", this).each(function(){
-				//var type = $("[name^='check']", this).attr("type");
-				//var check = $("[name^='check']", this).prop("checked");
-				//var text = $("[type^='text']", this).val();
-				var variant = {
-					'type' : $("[name^='check']", this).attr("type"),
-					'check': $("[name^='check']", this).prop("checked"),
-					'text' : $("[type^='text']", this).val(),
-				};
-				variants.push(variant);
-			});
-
-			//console.log(ajax);
-			/*
-		var quetion = {
-			'quetionText' : quetionText,
-			'variants' : {}
-		};
-
-
-		ajax.push(myObj);
-		ajax.push(myObj2);
-		console.log(ajax);
-*/
-
-		});
-		//console.log(ajax);
-    });
 
     /* Меняет на тип вопросов */
     $( "body" ).on(  "click", "[class^='btn btn-info']", function(){
@@ -114,30 +52,43 @@ $(document).ready(function(){
 
 	$("#saveTest").click(function(){
 
+        var conteiner = [];
+        
+        $(".content").children().each(function(){
+			var variants = [];
+			$(".input-group", this).each(function(){
+				var variant = {
+					'check': $("[name^='check']", this).prop("checked"),
+					'text' : $("[type^='text']", this).val(),
+				};
+				variants.push(variant);
+			});
 
-		var ajax = {
-			'sas' : 'sas',
-		};
-		
-        $.ajax({
-                type: "GET",
-                url: "/saveTest/",
-                data: {
-                    'colQuietions':$(".content").children().length,
-                    'nameField':$("#nameField").val(),
-                    'timeField': $("#timeField").val(),
-                    'categoryField': $("#categoryField").val(),
-                    'shortInfoField': $("#shortInfoField").val(),
-                    'fullInfoField': $("#fullInfoField").val(),
-                    'ajax' : ajax,
-                },
-                cache : false,
-                success: function(rsp) {
-                },
-                error: function(xhr) {
-                    //Do Something to handle error
-                }
-            });
-    });
+			var quetion = {
+				'quetionText' : $("textarea", this).val(), // Текст вопроса
+				'variant' : JSON.stringify(variants), // Все варианты ответа
+				'type' : $("[name^='check']", this).attr("type"),
+			};
+			conteiner.push(quetion);
+		});
+
+		$.ajax({
+			type: "GET",
+			url: "/saveTest/",
+			dataType: 'json',
+			data: {
+                'nameField':$("#nameField").val(),
+                'timeField': $("#timeField").val(),
+                'shortInfoField': $("#shortInfoField").val(),
+                'fullInfoField': $("#fullInfoField").val(),
+                'categoryField': $("#categoryField option:selected").text(),
+                'gropUser': $("#gropUser option:selected").text(),
+				'colQuition' : $(".content").children().length,
+				'ajax' : JSON.stringify(conteiner) 
+			},
+		});
+	});
+
+
 });
 

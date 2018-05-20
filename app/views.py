@@ -183,48 +183,55 @@ def answer(request):
 			idQuestion = TextQuestion.objects.get(textQuestion = ajax_quetion, test = startTest.test)
 			boolean = False
 			if idQuestion.typeQuestion == "radio":
-				print(str(data)[2:-2])
 				if str(data)[2:-2] == Question.objects.get(question=idQuestion, boolean=True, test = startTest.test).answer:
 					startTest.rezult += 1
 					startTest.save()
 					boolean = True	
-				createAnswer = Answer.objects.create(
-					idQuestion = idQuestion,
-					boolean = boolean,
-					timeAnswer = datetime.now(), 
-					startTest = StartTest.objects.get(id=startTest.id),
-				)
-				# ДОБАВИТЬ CHECKBOX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				#for ans in data:
-				#print(ans)
-			buff=Question.objects.filter(question=idQuestion, boolean=True, test = startTest.test)
-			print(buff)
 			if idQuestion.typeQuestion == "checkbox":
-				buff=Question.objects.filter(question=idQuestion, boolean=True, test = startTest.test).answer
-				if len(list(set(buff) & set(str(data))))==0:
+				answers = Question.objects.filter(question=idQuestion, boolean=True, test = startTest.test)
+				str_answers = "["
+				for ans in answers:
+					str_answers = str_answers + "'" + ans.answer + "', "
+				str_answers = str_answers[0:-2] + "]"
+				if str(data) == str_answers:
 					startTest.rezult += 1
 					startTest.save()
-					boolean = True
-				
-				createAnswer = Answer.objects.create(
-					idQuestion = idQuestion,
-					boolean = boolean,
-					timeAnswer = datetime.now(), 
-					startTest = StartTest.objects.get(id=startTest.id),
-				)
+					boolean = True	
+			createAnswer = Answer.objects.create(
+				idQuestion = idQuestion,
+				boolean = boolean,
+				timeAnswer = datetime.now(), 
+				startTest = StartTest.objects.get(id=startTest.id),
+			)
+
 		return render(request, "test.html")
 	return redirect("/")
+
+def clicTimer(user):
+	lastData = StartTest.objects.filter(user = user).last()
+	sd = lastData.timeStartTest
+	timeTest = lastData.test.timeTest
+	now = datetime.now(timezone.utc)
+	diff = sd + timedelta(minutes=timeTest) - now	
+	diffformat=str(diff).split(".")
+	flag=False
+	if diffformat[0]=="0:00:00"or"-"in diffformat[0]:
+		flag=True
+	return flag
 
 def test(request, page_number=1):
 	if connect(request):
 		user = User.objects.get(login=request.session['login'])
 		lastData = StartTest.objects.filter(user = user).last()
-		
+
 		if lastData.timeFinishTest != None:
 			return redirect("/rezultat")
 
 		allAnswer = Answer.objects.filter(startTest=lastData)
-		if len(allAnswer)==lastData.test.colQuition:
+		if allAnswer.count() == lastData.test.colQuition:
+			return redirect("/rezultat")
+		
+		if clicTimer(user):
 			return redirect("/rezultat")
 
 		test_id = Test.objects.get(id=lastData.test.id)
@@ -242,11 +249,7 @@ def test(request, page_number=1):
 			'answers':answer_page.page(page_number),
 		}
 
-		if clicTimer(user)==True:
-			context={
-
-			}
-			return render_to_response('rezultat.html',context)		
+			
 		return render_to_response('test.html',context)
 	return redirect("/")
 
@@ -288,22 +291,3 @@ def timer(request):
 		return render(request, 'timer.html', {"left": str(diff)[0:7]})
 	return redirect("/")
 
-def rezult(request, ):
-	if connect(request):
-		user = User.objects.get(login=request.session['login'])
-		
-		return render_to_response("rezultat.html")
-	return redirect("/")
-
-
-def clicTimer(user):
-	lastData = StartTest.objects.filter(user = user).last()
-	sd = lastData.timeStartTest
-	timeTest = lastData.test.timeTest
-	now = datetime.now(timezone.utc)
-	diff = sd + timedelta(minutes=timeTest) - now	
-	diffformat=str(diff).split(".")
-	flag=False
-	if diffformat[0]=="0:00:00"or"-"in diffformat[0]:
-		flag=True
-	return flag

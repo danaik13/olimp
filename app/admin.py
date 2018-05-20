@@ -37,7 +37,7 @@ class StartTestAdmin(admin.ModelAdmin):
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'idQuestion', 'boolean', 'timeAnswer', 'startTest')
+    list_display = ('id', 'boolean', 'timeAnswer', 'startTest', 'idQuestion')
 
 
 """

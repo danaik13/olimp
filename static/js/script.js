@@ -2,6 +2,9 @@ function show(){
     $.get("/timer/", function(data) {
         $("#timer").html(data);
     });
+    if ($("#timer").text() == '0:00:00 <-Время вышло!'){
+    	location.reload();
+    }
 }
 $(document).ready(function(){
 

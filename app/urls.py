@@ -24,7 +24,6 @@ urlpatterns = [
 
 
 	url(r'^index/(?P<сategorie_id>\w)/$', views.showTests,  name="сategorie"), #контент
-	url(r'^content', views.content), #контент
 	url(r'^rezultat', views.rezultat), #контент
 	url(r'^adminTest', views.adminTest), #контент
 	url(r'^saveTest/$', views.saveTest), #контент 
